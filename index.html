@@ -56,46 +56,10 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 body.fs .fs-in{display:none} body.fs .fs-out{display:block}
 .no-fs #fsBtn{display:none}
 
-/* resources: premium layer */
-.rhero{display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px}
-#rorb{width:260px;height:260px;display:block}
-.chips button{display:inline-flex;align-items:center;gap:.5em}
-.chips svg{width:15px;height:15px;color:var(--accent)}
-.rhead{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-.rico{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:var(--accent);
-  background:linear-gradient(145deg,rgba(36,83,240,.14),rgba(36,83,240,.04));box-shadow:inset 0 0 0 1px rgba(36,83,240,.12)}
-.rico svg{width:22px;height:22px}
-.rgroup.in .rico svg{animation:bob 3.6s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-2px) rotate(-4deg)}}
-.rgroup h3{margin:0}
-.card{position:relative;overflow:hidden;opacity:0;transform:translateY(14px)}
-.card.in{opacity:1;transform:none;transition:opacity .6s ease calc(var(--i)*70ms),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i)*70ms),border-color .2s,box-shadow .25s}
-a.card.in:hover{transform:translateY(-3px);transition-delay:0s}
-.card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;opacity:0;transition:opacity .3s;
-  background:conic-gradient(from var(--a,0deg),rgba(36,83,240,0),#2453F0,#7FA2FF,rgba(36,83,240,0) 40%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-a.card:hover::before{opacity:1;animation:spin 2.4s linear infinite}
-@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
-@keyframes spin{to{--a:360deg}}
-.ctop{display:flex;justify-content:space-between;align-items:flex-start}
-.mono{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:700;font-size:16px;color:#fff;
-  background:linear-gradient(140deg,#2453F0,#6F93FF);box-shadow:0 8px 18px -10px rgba(36,83,240,.8)}
-.card.built .mono{background:linear-gradient(140deg,#0B1B4F,#3A4A82)}
-.go{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--accent);background:rgba(36,83,240,.07);
-  transform:translate(-4px,4px);opacity:.5;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .3s,background .3s,color .3s}
-.go svg{width:14px;height:14px}
-a.card:hover .go{transform:none;opacity:1;background:var(--accent);color:#fff}
 @media (max-width:640px){
   .top .ttlTop{display:none}
   .top .logo{height:34px}
-  .rhero{grid-template-columns:1fr}
-  #rorb{width:150px;height:150px;grid-row:1;margin-bottom:-6px}
 }
-@media (prefers-reduced-motion: reduce){
-  .card{opacity:1;transform:none} .rgroup.in .rico svg,a.card:hover::before{animation:none}
-}
-body.res-open .top{background:var(--bg)}
-body.res-open #resBtn,body.res-open .top .hint{visibility:hidden}
 .an .dot{font-size:0;color:#fff;display:grid;place-items:center;font-weight:600}
 .an .pill b{display:none}
 .an.num line{display:none}
@@ -103,33 +67,9 @@ body.res-open #resBtn,body.res-open .top .hint{visibility:hidden}
 .an.num .pill b{display:inline-grid;place-items:center;width:17px;height:17px;margin-right:.5em;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:600}
 .an.num .pill{font-size:13px}
 
-#res{position:fixed;inset:0;z-index:5;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;cursor:default;user-select:text;
-  padding:calc(env(safe-area-inset-top,0px) + 76px) 20px calc(env(safe-area-inset-bottom,0px) + 56px);
-  opacity:0;visibility:hidden;transform:translateY(18px);transition:opacity .5s ease,transform .7s cubic-bezier(.2,.8,.2,1),visibility 0s linear .7s}
-body.res-open #res{opacity:1;visibility:visible;transform:none;transition-delay:0s}
-body.res-open #cap,body.res-open #ann{opacity:0;pointer-events:none}
 #cap,#ann{transition:opacity .4s}
-.rwrap{max-width:1040px;margin:0 auto}
-.rtop{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-#res h2{font-size:clamp(30px,5.4vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.05;margin:0 0 .35em;max-width:16ch}
-#res .lead{font-size:clamp(15px,1.8vw,17px);line-height:1.6;color:var(--muted);max-width:56ch;margin:0 0 24px}
-.chips{position:sticky;top:-1px;z-index:2;display:flex;gap:6px;overflow-x:auto;padding:10px 0 12px;margin:0 0 8px;background:var(--bg);scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chips button{flex:none;font:inherit;font-size:13px;color:var(--ink);background:rgba(36,83,240,.06);border:1px solid transparent;border-radius:999px;padding:.45em 1em;cursor:pointer}
-.chips button:hover{border-color:var(--accent)}
-.rgroup{padding-top:28px;scroll-margin-top:60px}
-.rgroup h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0 0 .2em}
-.rgroup>p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.6;max-width:60ch}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.card{display:flex;flex-direction:column;gap:8px;padding:18px 18px 16px;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:inherit;background:#fff;transition:border-color .2s,transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
-a.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(20,50,170,.4)}
-a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.card .nm{font-weight:600;font-size:17px;letter-spacing:-.01em}
-.card .ds{font-size:14px;line-height:1.55;color:var(--muted);flex:1}
-.card .ft{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px}
-.card .dm{color:var(--accent);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card .tag{flex:none;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.15em .65em}
-.fine{margin:36px 0 0;font-size:13px;line-height:1.6;color:var(--muted);max-width:62ch}
+body.intro #cap{opacity:0;visibility:hidden;pointer-events:none}
+body.intro .top .hint{visibility:hidden}
 
 @media (max-width:640px){
   .top{padding:calc(env(safe-area-inset-top,0px) + 14px) 14px 10px}
@@ -140,8 +80,6 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   #desc{font-size:13px;min-height:0}
   #ttl{font-size:21px}
   .an .pill{padding:.28em .7em}
-  #res{padding-left:16px;padding-right:16px;padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
-  .grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion: reduce){ .txt{animation:none} .an .pill,.an line,.an .dot{transition-duration:.01s} }
 </style>
@@ -155,7 +93,6 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   <b class="ttlTop">Anatomy of a training deck</b>
   <span style="flex:1"></span>
   <span class="hint">Click anywhere, or use the arrow keys</span>
-  <button class="tx" id="resBtn">Resources</button>
   <button class="tx ic" id="fsBtn" aria-label="Enter full screen" title="Full screen (F)">
     <svg class="fs-in" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
     <svg class="fs-out" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
@@ -171,22 +108,6 @@ a.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
     <div id="dots"></div>
     <button class="tx" id="next">Next</button>
   </nav>
-</section>
-
-<section id="res" aria-label="Resources">
-  <div class="rwrap">
-    <div class="rtop"><button class="tx" id="resBack">Back to the slides</button><button class="tx" id="resStart">Start over</button></div>
-    <div class="rhero">
-      <div>
-        <h2>Resources for building your deck</h2>
-        <p class="lead">Free places to find templates, step diagrams, illustrations, icons and photos. Every link opens in a new tab.</p>
-      </div>
-      <canvas id="rorb" aria-hidden="true"></canvas>
-    </div>
-    <div class="chips" id="chips"></div>
-    <div id="rlist"></div>
-    <p class="fine">Free plans on icon and illustration sites usually ask you to credit the creator. Check each site’s license before you publish or share your deck.</p>
-  </div>
 </section>
 
 <script>
@@ -260,7 +181,7 @@ const NN = N > 2000 ? 260 : 170, neu = [], adj = [], edges = [], glow = new Floa
     });
   });
 })();
-let netVis = 0, ob = 1, lastFire = 0;
+let netVis = 0, ob = 1, lastFire = 0, pv = 0;
 function fire(a, hops){
   const nb = adj[a]; if (!nb || !nb.length || pulses.length > 60) return;
   pulses.push({a, b: nb[(Math.random()*nb.length)|0], p: 0, h: hops || (5 + (Math.random()*6|0))}); glow[a] = 1;
@@ -292,8 +213,47 @@ function smooth(c,P){
 
 /* ---------- scenes ---------- */
 const nodes = [[400,440],[800,540],[1200,440]];
+/* deck-map + styles helpers */
+const Thumb = (x,y,lbl) => [
+  Box(x,y,180,110,12,2,{w:.5}),
+  Bar(x+18,y+24,92,10,{w:.12}), Bar(x+18,y+46,62,8,{w:.1}),
+  Box(x+122,y+22,40,66,6,2,{w:.12}),
+  T(lbl,x+90,y+150,26,{align:'center',weight:600,w:.6,kind:'sub'})
+];
+const Arrow = (x1,x2,y) => Cu([x1-4,y-18,x2-x1+8,36], c=>{c.lineWidth=3;c.beginPath();c.moveTo(x1,y);c.lineTo(x2,y);c.moveTo(x2-12,y-12);c.lineTo(x2,y);c.lineTo(x2-12,y+12);c.stroke();}, .3);
+const Icons = (x0,cy) => [
+  Ring(x0+100,cy,30,3,{w:.35}),
+  Cu([x0+82,cy-14,36,28], c=>{c.lineWidth=3;c.beginPath();c.moveTo(x0+88,cy+1);c.lineTo(x0+97,cy+10);c.lineTo(x0+113,cy-9);c.stroke();}, .2),
+  Cu([x0+184,cy-32,72,66], c=>{c.lineWidth=3;RR(c,x0+190,cy-28,60,42,10);c.stroke();c.beginPath();c.moveTo(x0+206,cy+14);c.lineTo(x0+200,cy+30);c.lineTo(x0+220,cy+14);c.stroke();}, .35),
+  Cu([x0+312,cy-40,56,82], c=>{c.lineWidth=3;c.beginPath();c.arc(x0+340,cy-10,22,Math.PI*.78,Math.PI*2.22);c.lineTo(x0+349,cy+22);c.lineTo(x0+331,cy+22);c.closePath();c.stroke();c.beginPath();c.moveTo(x0+332,cy+32);c.lineTo(x0+348,cy+32);c.stroke();}, .35)
+];
+
 const S = [
-  { name:'The thinking brain', desc:'Move your cursor over the brain to fire its neurons, then click anywhere to watch it build every core slide of a training deck.', els:null, ann:[] },
+  { name:'', desc:'', blank:true, els:null, ann:[] },
+
+  { name:'The thinking brain', brain:true, desc:'Move your cursor over the brain to fire its neurons, then click anywhere to watch it build every core slide of a training deck.', els:null, ann:[] },
+
+  { name:'Deck map', desc:'The map you build every training deck from: open the day, run each module with the same set of slides, then close with a recap.',
+    els:[
+      T('Deck Map',800,150,72,{align:'center',w:1.6}),
+      Box(80,220,330,580,24,3,{w:1}),
+      Box(480,220,700,580,24,3,{w:1.2}),
+      Box(1250,220,270,580,24,3,{w:1}),
+      T('Opening',245,284,32,{align:'center',weight:700,w:.8}),
+      T('Each module',830,284,32,{align:'center',weight:700,w:.9}),
+      T('Closing',1385,284,32,{align:'center',weight:700,w:.8}),
+      ...Thumb(155,340,'Cover'), ...Thumb(155,540,'Day journey'),
+      ...Thumb(520,340,'Overview'), ...Thumb(740,340,'Content'), ...Thumb(960,340,'Reflection'),
+      ...Thumb(520,540,'Case study'), ...Thumb(740,540,'Activity'), ...Thumb(960,540,'Break'),
+      ...Thumb(1295,440,'Recap'),
+      Arrow(420,470,510), Arrow(1190,1240,510),
+      Cu([524,730,604,32], c=>{c.lineWidth=3;c.setLineDash([12,10]);c.beginPath();c.moveTo(1120,746);c.lineTo(546,746);c.stroke();c.setLineDash([]);c.beginPath();c.moveTo(558,734);c.lineTo(544,746);c.lineTo(558,758);c.stroke();}, .5)
+    ],
+    ann:[
+      {t:'Open the day',            ax:245, ay:800, x:245, y:850},
+      {t:'Repeat for every module', ax:830, ay:746, x:830, y:850},
+      {t:'Close with a recap',      ax:1385, ay:800, x:1385, y:850}
+    ]},
 
   { name:'Cover slide', desc:'The first impression: topic title, subtitle, date and a strong image.',
     els:[
@@ -490,7 +450,36 @@ const S = [
       {t:'Key takeaways',       ax:800, ay:620, x:800, y:785}
     ]},
 
-  { name:'Resources', desc:'', res:true, els:null, ann:[] }
+  { name:'Deck styles', desc:'Pick one look and keep it for the whole deck: either HD photos with icons, or vector illustrations with icons.',
+    els:[
+      T('Two Deck Styles',800,150,64,{align:'center',w:1.6}),
+      Box(170,210,600,600,26,3,{w:1.2}), Box(830,210,600,600,26,3,{w:1.2}),
+      T('HD photos + icons',210,280,38,{w:1.1}),
+      T('Vector + icons',870,280,38,{w:1.1}),
+      Box(210,320,520,300,16,3,{w:1}),
+      Cu([220,350,500,260], c=>{c.lineWidth=3;c.beginPath();c.moveTo(240,600);c.lineTo(390,430);c.lineTo(470,510);c.lineTo(570,400);c.lineTo(710,600);c.stroke();
+        c.beginPath();c.moveTo(300,600);c.lineTo(390,500);c.moveTo(560,470);c.lineTo(640,600);c.stroke();}, .9),
+      Dot(320,385,24,{w:.3}),
+      Box(640,340,70,40,10,2,{w:.3}), T('HD',675,370,24,{align:'center',weight:700,w:.3}),
+      Box(870,320,520,300,16,3,{w:1}),
+      Cu([880,380,500,230], c=>{c.lineWidth=3;
+        c.beginPath();c.moveTo(890,590);c.lineTo(1370,590);c.stroke();
+        c.beginPath();c.arc(1000,420,30,0,Math.PI*2);c.stroke();
+        c.beginPath();c.moveTo(950,590);c.quadraticCurveTo(950,470,1000,466);c.quadraticCurveTo(1050,470,1050,590);c.stroke();
+        c.beginPath();c.moveTo(1180,590);c.lineTo(1180,470);c.stroke();
+        c.beginPath();c.moveTo(1180,540);c.quadraticCurveTo(1130,525,1135,480);c.quadraticCurveTo(1176,495,1180,540);c.stroke();
+        c.beginPath();c.moveTo(1180,505);c.quadraticCurveTo(1230,490,1226,446);c.quadraticCurveTo(1186,460,1180,505);c.stroke();
+      }, .9),
+      Ring(1320,385,26,3,{w:.3}),
+      ...Icons(170,690), ...Icons(830,690),
+      T('Real photos, sharp and high-res',210,775,24,{weight:500,w:.6,kind:'sub'}),
+      T('Flat illustrations in one style',870,775,24,{weight:500,w:.6,kind:'sub'})
+    ],
+    ann:[
+      {t:'Style 1: HD photos',      ax:470, ay:810, x:470, y:855},
+      {t:'Style 2: vector art',     ax:1130, ay:810, x:1130, y:855},
+      {t:'Icons in both styles',    ax:1196, ay:690, x:1530, y:690}
+    ]}
 ];
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -542,7 +531,8 @@ let cur = 0, curMode = 0, prevMode = 0, swirl = 1, ready = false, tGo = performa
 let crisp = 0, crispScene = 0;
 const K = reduce ? .16 : .045, D = reduce ? .62 : .82, SWF = reduce ? 0 : .014;
 function step(t){
-  const inside = cur === 0 && mouseIn;
+  pv += ((S[cur].blank ? 0 : 1) - pv) * .06;
+  const inside = S[cur].brain && mouseIn;
   hv += ((inside ? 1 : 0) - hv) * .05;
   const nx = inside ? Math.max(-1.5, Math.min(1.5, (mx-OC.x)/R)) : 0, ny = inside ? Math.max(-1.5, Math.min(1.5, (my-OC.y)/R)) : 0;
   ryO += (nx*.6 - ryO) * .04; rxO += (-ny*.45 - rxO) * .04;
@@ -569,7 +559,7 @@ function step(t){
     px[i] += vx[i]; py[i] += vy[i];
   }
   // neural signals
-  const netWant = curMode === 0 && !S[cur].res && t > tGo + 1100 ? 1 : 0;
+  const netWant = curMode === 0 && !S[cur].blank && t > tGo + 1100 ? 1 : 0;
   netVis += netWant ? (1 - netVis)*.04 : -netVis*.2;
   ob += ((curMode === 0 ? 1 : 0) - ob)*.05;
   if (netVis > .3) {
@@ -609,7 +599,7 @@ function draw(){
   for (let i=0;i<N;i++){
     const d = dep[i];
     const r = (curMode === 0 || d < .999) ? (.55 + 1.55*d*d) * (R/260 > 1 ? 1 : Math.max(.75, R/260)) : slideSize*.5 + .45;
-    const a = (.12 + .88*d*d) * pa * (1 - ob*(1 - fo[i])*.78);
+    const a = (.12 + .88*d*d) * pa * pv * (1 - ob*(1 - fo[i])*.78);
     if (a < .01) continue;
     ctx.globalAlpha = a;
     ctx.beginPath(); ctx.arc(px[i], py[i], r, 0, 6.2832); ctx.fill();
@@ -730,10 +720,8 @@ function ui(){
   const s = S[cur];
   fitFrame();
   const total = S.filter(x=>x.els).length;
-  $('num').textContent = s.els ? `${cur} of ${total}` : '';
-  const wasOpen = document.body.classList.contains('res-open');
-  document.body.classList.toggle('res-open', !!s.res);
-  if (s.res && !wasOpen) { $('res').scrollTop = 0; }
+  $('num').textContent = s.els ? `${S.slice(0,cur+1).filter(x=>x.els).length} of ${total}` : '';
+  document.body.classList.toggle('intro', !!(s.blank || s.brain));
   $('ttl').textContent = s.name; $('desc').textContent = s.desc;
   ['num','ttl','desc'].forEach(id=>{ const e=$(id); e.classList.remove('txt'); void e.offsetWidth; e.classList.add('txt'); });
   [...dotsEl.children].forEach((b,i)=>{ b.classList.toggle('on', i===cur); b.setAttribute('aria-current', i===cur ? 'step' : 'false'); });
@@ -744,7 +732,7 @@ function go(n){
   if (!ready) return;
   n = (n + S.length) % S.length; if (n === cur) return;
   const t = performance.now();
-  bX.set(aX); bY.set(aY); prevMode = curMode; curMode = (n === 0 || S[n].res) ? 0 : 1;
+  bX.set(aX); bY.set(aY); prevMode = curMode; curMode = S[n].els ? 1 : 0;
   if (curMode === 1) {
     const sc = S[n], ang = new Float32Array(N);
     for (let i=0;i<N;i++) ang[i] = Math.atan2((py[i]-F.y)/F.k - 450, (px[i]-F.x)/F.k - 800);
@@ -757,11 +745,10 @@ function go(n){
 }
 
 /* ---------- input ---------- */
-document.addEventListener('click', e=>{ if (S[cur].res || e.target.closest('button,a,#cap,#res')) return; go(cur+1); });
+document.addEventListener('click', e=>{ if (e.target.closest('button,a,#cap')) return; go(cur+1); });
 $('next').addEventListener('click', e=>{ e.stopPropagation(); go(cur+1); });
 $('prev').addEventListener('click', e=>{ e.stopPropagation(); go(cur-1); });
 addEventListener('keydown', e=>{
-  if (S[cur].res) { if (['ArrowLeft','Backspace','Escape'].includes(e.key) && !e.target.closest('input')) { e.preventDefault(); go(cur-1); } return; }
   if (['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)) { if (e.key==='Enter' && e.target.closest('button')) return; e.preventDefault(); go(cur+1); }
   else if (['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); go(cur-1); }
   else if (e.key === 'Home') go(0);
@@ -770,104 +757,6 @@ addEventListener('keydown', e=>{
 addEventListener('pointermove', e=>{ mx = e.clientX; my = e.clientY; mouseIn = e.pointerType === 'mouse' || e.buttons > 0; });
 addEventListener('pointerup', e=>{ if (e.pointerType !== 'mouse') mouseIn = false; });
 document.addEventListener('mouseout', e=>{ if (!e.relatedTarget) mouseIn = false; });
-
-/* ---------- resources ---------- */
-const IC = {
-  templates:'<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h5M8 15.5h3M9 21h6"/>',
-  diagrams:'<circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.7 10.6l3.6-3.2M13.7 7.4l3.6 3.2M17.3 13.4l-3.6 3.2M10.3 16.6l-3.6-3.2"/>',
-  illustrations:'<path d="M12 21a9 9 0 1 1 9-9c0 2-1.5 3-3 3h-2a2 2 0 0 0-1.4 3.4c.6.6.4 2.6-2.6 2.6z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15.5" cy="7.5" r="1.2"/>',
-  icons:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><circle cx="17" cy="7" r="3.5"/><path d="M7 13.5l3.5 7h-7zM14 14h6v6h-6z"/>',
-  photos:'<path d="M4 8h3l1.5-2.5h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/>',
-  tools:'<path d="M4 20l11-11M14 4v3M12.5 5.5h3M19 9v2M18 10h2M18 3.5v1.5M17.25 4.25h1.5"/><path d="M15 9l1.5-1.5"/>'
-};
-const svgI = (k,w=22) => `<svg viewBox="0 0 24 24" width="${w}" height="${w}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>`;
-const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
-const RES = [
-  {id:'templates', t:'Slide templates', d:'Complete, ready-made decks. Pick one, then swap in your own content.', items:[
-    ['Slidesgo','https://slidesgo.com','Free Google Slides and PowerPoint themes, organized by topic and style.','Free + premium'],
-    ['SlidesCarnival','https://www.slidescarnival.com','Fully free presentation templates for PowerPoint and Google Slides.','Free'],
-    ['PresentationGO','https://www.presentationgo.com','Free templates, diagrams and charts in 16:9 and 4:3, often in light and dark versions.','Free'],
-    ['Canva templates','https://www.canva.com/presentations/templates/','Thousands of editable decks you can download as PowerPoint.','Free + Pro']
-  ]},
-  {id:'diagrams', t:'Step diagrams & infographics', d:'Need exactly three or four steps? These let you browse layouts by the number of steps.', items:[
-    ['SlideModel (free section)','https://slidemodel.com/free-powerpoint-templates/','Process diagrams you can browse by 3, 4, 5, 6 steps and more. The free section is a subset of a paid library.','Free + paid'],
-    ['Slidesgo infographics','https://slidesgo.com/infographics','Process, timeline and step infographics ready to drop into a slide.','Free + premium'],
-    ['PresentationGO diagrams','https://www.presentationgo.com','Editable process, cycle and step diagrams, free to download as PPTX.','Free'],
-    ['PowerPoint SmartArt','','Built into PowerPoint: Insert › SmartArt › Process, then add or remove shapes to match your steps.','Built in']
-  ]},
-  {id:'illustrations', t:'Illustrations', d:'Flat illustrations that give a slide a friendly, consistent look.', items:[
-    ['Storyset','https://storyset.com','Free illustrations you can recolor, and even animate, before downloading.','Free with credit'],
-    ['unDraw','https://undraw.co','Open-source illustrations. Set your brand color before you download.','Free'],
-    ['Freepik','https://www.freepik.com','Huge library of vectors and illustrations in many styles.','Free + premium']
-  ]},
-  {id:'icons', t:'Icons', d:'Keep one icon style per deck: all outline or all filled.', items:[
-    ['Flaticon','https://www.flaticon.com','Flat icons in PNG and SVG, grouped into packs that share one style.','Free with credit'],
-    ['Icons8','https://icons8.com','Consistent icon sets in dozens of styles.','Free with credit'],
-    ['The Noun Project','https://thenounproject.com','A simple icon for almost any idea you can think of.','Free with credit'],
-    ['PowerPoint icons','','Built into PowerPoint 365: Insert › Icons. Recolor them like any shape.','Built in']
-  ]},
-  {id:'photos', t:'Photos', d:'High-quality stock photos for covers, reflection slides and backgrounds.', items:[
-    ['Pexels','https://www.pexels.com','Free photos and videos, no credit required.','Free'],
-    ['Unsplash','https://unsplash.com','Beautiful free photography from a large creator community.','Free'],
-    ['Pixabay','https://pixabay.com','Free photos, illustrations and vectors in one place.','Free']
-  ]},
-  {id:'tools', t:'Design helpers', d:'Small tools that make a deck look finished.', items:[
-    ['Canva','https://www.canva.com','Design visuals, crop and mock up images, then export them for your slides.','Free + Pro'],
-    ['Coolors','https://coolors.co','Generate a color palette for your deck in seconds.','Free'],
-    ['Google Fonts','https://fonts.google.com','Free fonts you can install and use in PowerPoint.','Free'],
-    ['remove.bg','https://www.remove.bg','Remove a photo’s background in one click.','Free + paid']
-  ]}
-];
-(function buildRes(){
-  const list = $('rlist'), chips = $('chips');
-  RES.forEach(g=>{
-    const sec = document.createElement('section'); sec.className = 'rgroup'; sec.id = 'res-' + g.id;
-    sec.innerHTML = `<div class="rhead"><span class="rico">${svgI(g.id)}</span><h3></h3></div><p></p><div class="grid"></div>`;
-    sec.querySelector('h3').textContent = g.t; sec.querySelector('p').textContent = g.d;
-    const grid = sec.querySelector('.grid');
-    g.items.forEach(([n,u,d,tag],i)=>{
-      const c = document.createElement(u ? 'a' : 'div'); c.className = 'card' + (u ? '' : ' built'); c.style.setProperty('--i', i);
-      if (u) { c.href = u; c.target = '_blank'; c.rel = 'noopener noreferrer'; }
-      const host = u ? new URL(u).hostname.replace(/^www\./,'') : 'Inside PowerPoint';
-      c.innerHTML = `<span class="ctop"><span class="mono"></span>${u ? '<span class="go">'+ARROW+'</span>' : ''}</span><span class="nm"></span><span class="ds"></span><span class="ft"><span class="dm"></span><span class="tag"></span></span>`;
-      c.querySelector('.mono').textContent = n.replace(/^The /,'').charAt(0);
-      c.querySelector('.nm').textContent = n; c.querySelector('.ds').textContent = d;
-      c.querySelector('.dm').textContent = host; c.querySelector('.tag').textContent = tag;
-      grid.appendChild(c);
-    });
-    list.appendChild(sec);
-    const b = document.createElement('button'); b.innerHTML = svgI(g.id,15) + '<span></span>'; b.querySelector('span').textContent = g.t;
-    b.addEventListener('click', ()=>sec.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}));
-    chips.appendChild(b);
-  });
-  // reveal cards and section icons as they scroll into view
-  const io = new IntersectionObserver(es=>es.forEach(en=>{ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }),
-    {root: $('res'), threshold: .15});
-  document.querySelectorAll('#res .card, #res .rgroup').forEach(el=>io.observe(el));
-})();
-
-/* small dotted orb in the resources header */
-(function rOrb(){
-  const c = $('rorb'), g = c.getContext('2d'), n = 520, pts = [];
-  for (let i=0;i<n;i++){ const y = 1-2*(i+.5)/n, r = Math.sqrt(1-y*y), th = i*2.399963; pts.push([Math.cos(th)*r, y, Math.sin(th)*r]); }
-  let sz = 0;
-  function frame(t){
-    requestAnimationFrame(frame);
-    if (!document.body.classList.contains('res-open')) return;
-    const w = c.clientWidth, d = Math.min(2, devicePixelRatio||1);
-    if (w !== sz) { sz = w; c.width = c.height = w*d; }
-    g.setTransform(d,0,0,d,0,0); g.clearRect(0,0,w,w); g.fillStyle = '#2453F0';
-    const ry = reduce ? .6 : t*.0003, cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(.4), sx = Math.sin(.4), R0 = w*.42;
-    for (const [x0,y0,z0] of pts){
-      let x = x0*cy + z0*sy, z = -x0*sy + z0*cy, y = y0*cx - z*sx; z = y0*sx + z*cx;
-      const p = 3.2/(3.2+z), dd = (1-z)/2;
-      g.globalAlpha = .12 + .88*dd*dd;
-      g.beginPath(); g.arc(w/2 + x*R0*p, w/2 + y*R0*p, (.5 + 1.5*dd*dd)*(w/260), 0, 6.2832); g.fill();
-    }
-    g.globalAlpha = 1;
-  }
-  requestAnimationFrame(frame);
-})();
 
 /* full screen */
 (function fullScreen(){
@@ -884,10 +773,6 @@ const RES = [
   btn.addEventListener('click', e=>{ e.stopPropagation(); toggle(); });
   addEventListener('keydown', e=>{ if ((e.key === 'f' || e.key === 'F') && !e.metaKey && !e.ctrlKey) toggle(); });
 })();
-const resIdx = S.findIndex(x=>x.res);
-$('resBtn').addEventListener('click', e=>{ e.stopPropagation(); go(resIdx); });
-$('resBack').addEventListener('click', e=>{ e.stopPropagation(); go(resIdx-1); });
-$('resStart').addEventListener('click', e=>{ e.stopPropagation(); go(0); });
 
 /* ---------- start ---------- */
 resize(); ui(); requestAnimationFrame(loop);
