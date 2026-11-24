@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Ways to Experience the Program | Tick &amp; Talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --o:#FF7600; --o2:#FF9A40; --o-soft:rgba(255,118,0,.14);
+  --bg:#0A0A0A; --bg2:#111; --card:#151515; --line:#262626; --mut:#8c8c8c; --txt:#F2F2F2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.o{color:var(--o)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(10,10,10,.82);backdrop-filter:blur(14px);border-bottom:1px solid #1c1c1c}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+nav img{height:20px}
+.toggle{position:relative;display:flex;background:#161616;border:1px solid #2a2a2a;border-radius:999px;padding:4px}
+.toggle button{position:relative;z-index:2;border:0;background:none;color:#aaa;font:600 13px Poppins;padding:10px 22px;border-radius:999px;cursor:pointer;transition:color .35s;white-space:nowrap}
+.toggle button.on{color:#fff}
+.toggle .pill{position:absolute;z-index:1;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--o);box-shadow:0 6px 24px rgba(255,118,0,.45);transition:left .45s cubic-bezier(.7,0,.2,1),width .45s cubic-bezier(.7,0,.2,1)}
+.navtag{font-size:11px;color:var(--mut);letter-spacing:2px;text-transform:uppercase}
+
+/* HERO */
+.hero{position:relative;padding:90px 0 60px;overflow:hidden}
+.hero .glow{position:absolute;width:900px;height:900px;border-radius:50%;right:-300px;top:-420px;background:radial-gradient(circle,rgba(255,118,0,.22),rgba(255,118,0,0) 60%);pointer-events:none}
+.hero .ring{position:absolute;right:-120px;top:-160px;width:520px;height:520px;border-radius:50%;border:1.5px solid rgba(255,118,0,.35);pointer-events:none}
+.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--mut);font-weight:500}
+.hero h1{font-size:64px;line-height:1.02;font-weight:700;letter-spacing:-1.5px;margin:16px 0 18px;max-width:880px}
+.hero p.lead{font-size:17px;line-height:1.7;color:#bdbdbd;max-width:680px;font-weight:300}
+.choice{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.choice .c{cursor:pointer;border:1px solid var(--line);background:linear-gradient(160deg,#161616,#0f0f0f);border-radius:20px;padding:26px 28px;transition:.35s;position:relative;overflow:hidden}
+.choice .c:hover{border-color:#444;transform:translateY(-2px)}
+.choice .c.on{border-color:var(--o);box-shadow:0 0 0 1px var(--o),0 20px 60px -20px rgba(255,118,0,.5)}
+.choice .c .k{font-size:11px;letter-spacing:2.5px;color:var(--o);font-weight:600;text-transform:uppercase}
+.choice .c h3{font-size:24px;font-weight:700;margin:6px 0 6px}
+.choice .c p{font-size:14px;color:#a9a9a9;line-height:1.6}
+.choice .c .chip{position:absolute;right:22px;top:22px;font-size:11px;font-weight:600;border:1px solid #333;border-radius:999px;padding:5px 12px;color:#888;transition:.3s}
+.choice .c.on .chip{background:var(--o);border-color:var(--o);color:#fff}
+
+/* SECTIONS */
+section.blk{padding:70px 0 30px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:28px}
+.sh h2{font-size:38px;font-weight:700;letter-spacing:-.8px;line-height:1.1}
+.sh h2 small{display:block;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--o);font-weight:600;margin-bottom:10px}
+.sh p{max-width:430px;color:#a5a5a5;font-size:14px;line-height:1.7}
+.fade{transition:opacity .35s,transform .35s}
+.fade.out{opacity:0;transform:translateY(8px)}
+
+/* ROOM */
+.room{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;align-items:stretch}
+.stage{background:radial-gradient(120% 90% at 50% 0%,#191919,#0d0d0d);border:1px solid var(--line);border-radius:24px;padding:18px;position:relative;overflow:hidden}
+.stage svg{width:100%;height:auto;display:block}
+.stage .legend{display:flex;gap:16px;flex-wrap:wrap;padding:8px 6px 2px;font-size:12px;color:#9a9a9a}
+.stage .legend span{display:flex;align-items:center;gap:7px}
+.stage .legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column}
+.panel .k{font-size:11px;letter-spacing:2.5px;color:var(--o);font-weight:600;text-transform:uppercase}
+.panel h3{font-size:26px;font-weight:700;margin:8px 0 4px;line-height:1.15}
+.panel .meta{font-size:12.5px;color:var(--mut);margin-bottom:16px}
+.panel .row{border-top:1px solid #232323;padding:13px 0}
+.panel .row b{display:block;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#cfcfcf;font-weight:600;margin-bottom:5px}
+.panel .row p{font-size:14px;line-height:1.6;color:#bdbdbd}
+.panel .row p .tool{color:var(--o);font-weight:600}
+.ctrls{margin-top:auto;padding-top:16px;display:flex;gap:10px;align-items:center}
+.btn{border:1px solid #333;background:#1b1b1b;color:#eee;font:600 13px Poppins;padding:10px 16px;border-radius:12px;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--o);color:#fff}
+.btn.pri{background:var(--o);border-color:var(--o);color:#fff;box-shadow:0 8px 24px -8px rgba(255,118,0,.7)}
+.prog{flex:1;height:4px;background:#242424;border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--o);transition:width .5s}
+
+/* steps strip */
+.steps{margin-top:18px;display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.steps button{flex:none;border:1px solid #2a2a2a;background:#131313;color:#aaa;font:500 12.5px Poppins;padding:9px 14px;border-radius:12px;cursor:pointer;transition:.25s;text-align:left;line-height:1.3}
+.steps button small{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#666}
+.steps button.db{border-style:dashed}
+.steps button.on{border-color:var(--o);color:#fff;background:var(--o-soft)}
+.steps button.on small{color:var(--o2)}
+.steps .sep{flex:none;align-self:center;font-size:11px;color:#555;letter-spacing:2px;text-transform:uppercase;padding:0 6px}
+
+/* svg room styles */
+.wall{fill:#121212;stroke:#2b2b2b;stroke-width:2}
+.lbl{font:600 11px Poppins;fill:#8a8a8a;letter-spacing:1.5px;text-transform:uppercase}
+.lbl.sm{font-size:9.5px}
+.zone{transition:opacity .5s, filter .5s}
+.zone .hl{fill:none;stroke:var(--o);stroke-width:2;stroke-dasharray:6 6;opacity:0;transition:opacity .4s}
+.zone.act .hl{opacity:1;animation:dash 1.2s linear infinite}
+.zone.act .lbl{fill:var(--o)}
+.zone.act path{filter:drop-shadow(0 0 6px rgba(255,118,0,.6))}
+body[data-mode="game"] .zone.act .hl{animation:none}
+body[data-mode="game"] .loopbadge.pz{background:#FF7600;color:#111;border-color:#FF7600}
+.stok{transition:transform 1.1s cubic-bezier(.65,0,.25,1),opacity .5s}
+.talk .p circle{animation:bob .9s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.talk .p:nth-child(2n) circle{animation-delay:.45s}
+.talk .p:nth-child(3n) circle{animation-delay:.2s}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.18)}}
+.bub{opacity:0;transition:opacity .4s}
+.talk ~ .bubs .bub, .bubs.on .bub{animation:bub 2.4s ease-in-out infinite}
+@keyframes bub{0%,100%{opacity:0;transform:translateY(4px)}15%,60%{opacity:1;transform:translateY(0)}75%{opacity:0}}
+.bub{transform-box:fill-box}
+.paused{opacity:0;transition:opacity .5s}
+.paused.on{opacity:1}
+.stagebar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:2px 2px 12px;flex-wrap:wrap}
+.mini{display:flex;gap:8px}
+.btn.sm{padding:8px 13px;font-size:12.5px;border-radius:10px}
+.loopbadge{position:static;font:600 12px Poppins;letter-spacing:2px;color:#fff;background:rgba(255,118,0,.16);border:1px solid rgba(255,118,0,.5);padding:6px 12px;border-radius:999px;text-transform:uppercase;transition:.3s}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.dim .zone:not(.act){opacity:.45}
+.tbl{fill:#1d1d1d;stroke:#353535;stroke-width:1.5}
+.chair{fill:#262626}
+.p{transition:transform 1.1s cubic-bezier(.65,0,.25,1)}
+.p circle{stroke:#0d0d0d;stroke-width:2}
+.trainer{transition:transform 1.1s cubic-bezier(.65,0,.25,1)}
+.pulse{animation:pulse 1.8s ease-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes pulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.token{transition:transform 1.1s cubic-bezier(.65,0,.25,1)}
+.beam{stroke:var(--o);stroke-width:1.2;opacity:0;transition:opacity .5s;stroke-dasharray:3 5}
+.beam.on{opacity:.55}
+.storm{opacity:0;transition:opacity .6s}
+.storm.on{opacity:1}
+
+/* journey */
+.jgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.jcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;position:relative;overflow:hidden}
+.jcard h4{font-size:18px;font-weight:700;margin-bottom:4px}
+.jcard p.s{font-size:13.5px;color:#a6a6a6;line-height:1.6}
+.jcard svg{width:100%;height:auto;display:block;margin-top:10px}
+
+/* timeline */
+.tl{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px}
+.tl .day{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;margin-bottom:16px}
+.tl .day > b{font-size:12px;letter-spacing:2px;color:#ccc}
+.bar{display:flex;height:46px;border-radius:10px;overflow:hidden;gap:2px}
+.bar div{position:relative;transition:flex .8s cubic-bezier(.65,0,.25,1),background .6s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:rgba(255,255,255,.9);overflow:hidden;white-space:nowrap;cursor:default}
+.bar div:hover{filter:brightness(1.2)}
+.ticks{display:grid;grid-template-columns:70px 1fr;gap:16px;margin-top:-6px}
+.ticks div{display:flex;justify-content:space-between;font-size:10.5px;color:#666}
+.keys{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-size:12.5px;color:#aaa}
+.keys span{display:flex;align-items:center;gap:8px}
+.keys i{width:14px;height:14px;border-radius:4px;display:inline-block}
+.energy{margin-top:26px;border-top:1px solid #222;padding-top:22px}
+.energy h4{font-size:15px;font-weight:600;margin-bottom:2px}
+.energy p{font-size:12px;color:#777}
+.energy svg{width:100%;height:auto;display:block;margin-top:10px}
+
+.tk{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tkc{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px}
+.tkc .hd{display:flex;justify-content:space-between;align-items:baseline}
+.tkc h4{font-size:22px;font-weight:700}
+.tkc .cnt{font-size:12px;color:var(--mut);letter-spacing:1.5px;text-transform:uppercase}
+.tkc .sb{font-size:13px;color:var(--o);font-weight:600;margin:4px 0 10px}
+.tkc .fmt{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #333;border-radius:999px;padding:4px 10px;color:#bbb;margin-bottom:8px}
+.tki{display:flex;gap:12px;padding:14px 0;border-top:1px solid #232323}
+.tki i{width:9px;height:9px;border-radius:50%;background:var(--o);margin-top:7px;flex:none}
+.tki b{font-size:15px;font-weight:600;display:block}
+.tki span{font-size:13px;color:#a5a5a5;line-height:1.55;display:block;margin-top:3px}
+.tknote{margin-top:16px;font-size:13px;color:#a5a5a5;line-height:1.6}
+.tknote b{color:var(--o)}
+/* compare */
+.cmp{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.m{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;position:relative;overflow:hidden}
+.m .t{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#888;font-weight:600}
+.m .v{font-size:44px;font-weight:700;letter-spacing:-1px;margin:8px 0 2px;transition:color .4s}
+.m .v small{font-size:16px;color:#888;font-weight:500;margin-left:4px}
+.m .d{font-size:12.5px;color:#9a9a9a;line-height:1.5}
+.m .meter{margin-top:14px;height:6px;background:#242424;border-radius:6px;overflow:hidden}
+.m .meter i{display:block;height:100%;background:var(--o);border-radius:6px;transition:width .9s cubic-bezier(.65,0,.25,1)}
+.roles{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.roles .m .v{font-size:22px;letter-spacing:0}
+.foot-note{margin-top:14px;font-size:11.5px;color:#666}
+
+footer{margin-top:80px;border-top:1px solid #1d1d1d;padding:50px 0 60px;background:radial-gradient(60% 120% at 50% 0%,rgba(255,118,0,.12),transparent 70%)}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer img{height:22px}
+footer p{color:#aaa;font-size:13px;line-height:1.7}
+footer .ct{display:flex;gap:26px;font-size:13px;color:#ddd;flex-wrap:wrap}
+
+@media (max-width:980px){
+  .tk{grid-template-columns:1fr}
+  .hero h1{font-size:42px}
+  .room,.jgrid,.choice{grid-template-columns:1fr}
+  .cmp{grid-template-columns:1fr 1fr}
+  .roles{grid-template-columns:1fr}
+  .navtag{display:none}
+  .sh{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  nav .wrap{height:auto;padding:10px 16px;gap:14px}
+  nav img{height:15px;flex:none}
+  .toggle{flex:1;max-width:260px}
+  .toggle button{flex:1;padding:9px 8px;font-size:12px}
+  .toggle .lg{display:none}
+  .hero{padding:46px 0 24px}
+  .hero .glow{width:520px;height:520px;right:-260px;top:-260px}
+  .hero .ring{width:300px;height:300px;right:-120px;top:-120px}
+  .eyebrow{font-size:10.5px;letter-spacing:2px}
+  .hero h1{font-size:34px;letter-spacing:-.8px}
+  .hero p.lead{font-size:15px}
+  .choice{margin-top:28px;gap:12px}
+  .choice .c{padding:20px}
+  .choice .c h3{font-size:20px}
+  .choice .c .chip{position:static;display:inline-block;margin-bottom:12px}
+  section.blk{padding:46px 0 6px}
+  .sh{margin-bottom:18px;gap:10px}
+  .sh h2{font-size:28px}
+  .sh p{font-size:13.5px}
+  .stage{padding:8px;border-radius:18px}
+  .loopbadge{font-size:9.5px;letter-spacing:.8px;padding:6px 9px;white-space:nowrap}
+  .stagebar{padding:4px 2px 10px;flex-wrap:nowrap;gap:6px}
+  .mini{gap:5px;flex:none}
+  .btn.sm{padding:7px 10px;font-size:12px}
+  .lbl{font-size:20px;letter-spacing:.6px}
+  .lbl.sm{font-size:17px}
+  .stage .legend{gap:10px;font-size:11.5px}
+  .panel{padding:20px;border-radius:18px}
+  .panel h3{font-size:22px}
+  .panel .row p{font-size:13.5px}
+  .jcard{padding:20px;border-radius:18px}
+  .jcard svg text{font-size:14px !important}
+  .cmp{grid-template-columns:1fr;gap:12px}
+  .tkc{padding:20px;border-radius:18px}
+  .tkc h4{font-size:20px}
+  .tk{gap:12px}
+  .roles{gap:12px;margin-top:12px}
+  .m .v{font-size:38px}
+  footer{margin-top:50px;padding:36px 0 44px}
+  footer .ct{gap:14px;flex-direction:column}
+}
+</style>
+</head>
+<body data-mode="kolb">
+
+<nav>
+  <div class="wrap">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmkAAAB3CAYAAABYMtcQAAAdE0lEQVR4Xu2dbch1VZnHL2ekD4mME+M0UBiIL6Q5jjOWKIVJo2KKpqAx6OTEiPgCg5L4IRFnGJQhDCMwRYQZIxlSGHXwhTRQMUYyQUwT0hAKG4pCBLEPA/EMv7u9Hs+z73Pus1+ua+219v7/4MbS+95nn33WudZ/Xa8H7du3749MCCGEEEIUhQSaEEIIIUSBSKQJIYQQQhTIwRPe05+Z2SHN679nZr+d8F7gj83so2b284nvY8mkz8CLEtaVEFPS/k69ZWa/n/KGRGc+1vk3u9F3b/N+fa29ARyUIScNI3GKmZ1kZqea2Rlm9hete/1PM7tswP2PgQV4mpmda2bHm9lfrlzsx2b2jJm9YGZPFSAglwKfyZuOb3aKdSXEVHzQzE43s7PM7Dgz+9s1N3KkDqLV4C2m2Yv74P36WnsDiPSkfcLM/tHM/mnAfUXCQr3KzL65x4sg2FZFGwLyAZ1AhRCFgT1DlF23QZQJISomQqThDbnVzP6uwOeCcPzeGk/eNr5jZjea2Rd0ChVCFAKRgAcH2DMhRCV4Fw7c3ISrShVoL48waHjWCMV5x+mFEKIPeM84bD43wp4JISrAS6RhNPA2/XOh7zkZNQ8ebooMhBAiNxRcvajQphDLwEukPV5oeDNxn+OJE4/a7ctYHkKIgqAwgGjAar6sEGLGeIi0aws/1ZG34R1+pRiC/DYhhMjFPY6HTSFEBYwVaeRn7VUlWQIXB90Epe5CCJGDcwIOm0KIwhkr0jjZlc5ng26Qnm9CCJGDe3O8iBCiLMa04CA/Yl2zxJKgYCAqf4MQau4GvEKI5UFqRbsBuBCiLlKz6cOa22YCxOvbmuWPEWkXVPB8GPMUCZVWU4+zEkLMmwvn/faEmDXk7V+xh8OIyTg3berBOkak/cOsH2s3mD0qkSaEiKTU1kZCiM3gOXtoJeJI/j6jJvGg/UkzKYR0LKJy/FCQeGf7cmNEWumhTvhN8ApiYKwQQkTRd96iEGJ6EGhvNGkK3zezS9c4dJ5obhNPGwKOn5fM7H9Wb3+MSKuB35nZr4LyORjC7j2AVgghVolO2RBC+MNoTPJIEV6EMtelhyHGcPTgPXu0mWjEFJEDDmZDRVpNo5GeDipdf8b/cxVCCCFExVDoQ+gSB9ENZjsHLSYyrYPfObEJgVKIuOv3xrbgqIHHgm6S2LIQQkRyXOTFhRDupEIferS2o23nmdmRjYgDvG142uABs50I3QEsQaQ90ihaT1C/PFAhhIgklesLIerg081t/nDN7b7WeM3uXqNLEHRfa//N0HBnTZCXRvkrMV8vzlY+mhBCCCFaUFS5KWedAQAUNB6/kiv/5Mrfv7JEkQZUUdCLxGOGJ4mAr2pZCiGEEGINP9nwVNpdMWivk6o84d323y0h3Jm40iHsiTomEVAIIYQQYh1nbHgs7Z6H32793qFLFmmEPY8YMRAeD9rJCnMKIYQQYgNE7SgIoFdam381sw+vOIwebv3CrukiS/KkAYl515vZZ3p41VKJLH+nvmhCCCGE2MRPm//w5Q2/wJQi8tqB2eIpDYv+aBe1/2ZpIi1BE7mjG7FGPxM6Aq+CEubfI+bwvikHTQghhBDb+HrzC0TfNvWURVOgL4DeaHjdvrpuvucSqjs3QfgTscZPmpelgelCCCGEGAraAicPIg198ddNb7Q2/DdCn8wA/xuz9TN6l+pJ24SGpQshhBBiDPRBI0JHbtr/mtlpzQioNgi668z2TzBK3rX9lOJJi5oKIIQQQgiRE/LXyTu7ufGQEdLkB+H2AzM71swONzugJQcC7YDh6lCKSBNCCCGEmBNUc9Jm40tmdlUjylZ7pVGYiNftLrP1kbx1Im3TINBVUICe3Ghm5zpc8FvrlGjjarzG4fqJTa8jhBBCCJH4udmOWOOnXUjw1rauEetEmkdX/r5QhsrPWAib7nIXNg/G831tep2SoFoEMc2AZub/dRHBKezMaIo3zXbi5cIfPhuG7J5gZh8ys1NbL8HYkBeatcz/nsPnQHn5x5v3DEc1Lv/VVAeM2S+b3I25t7tJ389t8Jw88RrYnnNdsrHR5JPvS1o3q6TvC2D/t258HaCI7Bsdfq8rOtiXC+uLnDFYt08+b2Yvmdnrm7xdPcDG9ULhzvmAUTnTzD5lZpeszAXrQ1vIpkHyzBZ7diZiYSrYlOmbc34rD6ELtISpzcizHo8xs881vX82HcI2HZ7I3fhvM/v3ma67C5ocldx4zTC+rBm1F0GyZWyYQw/XrJ//MLNHBq4fKu6GvvY6ajjYLwUOjGc1P1RhbmN1HTB1iCHoQ9dVbyTS6oYTwHnNAHkPT2QbKlNYxGkhY/g4XUqwdYfP6NaRBh8jwQ+imWTUUvv2YfxOMbNbBgjRNuRt8EMZO6NUbtsWFhBZ6e0R2AKHmNObz9nDlqX1A6wh7Jb3PYu6SAdl+pGxtw2BtZlSwiIPKvuZWwuOdaHOucFGiGv2e01IEgPkYdS6gOHjJM4QWKpW1o29EH+AZ8OXmbCx14kcw/KymV1b4ENmTf7CzJ5zEGhtEGlc+5wC3/dSISztAd8TbAk2BdsSYcs4ZPI95HWwn2J5YIPfaAT7UIHWJlVshjI3kfZe6NOaFowLCy1qI+wLG2cSazJ8B8LnxLPxEmdtyI8oBTyF3A/izMv4rYNrs4nfoY12FqyKs/bQ6Sh4ncfNdsKpYhnwWWOfEFQR9imNgApjbiJtrs1ok5ciaqGNIXk5PjHmIjMBsRp9ulrbS2ci8OjhoYjwfmwCr8iLe4xbEXkgWX8oyauRS5ytQjQAb/SmcT1iPuB5/3WgfWL9UrEZypxEGsnVc4NTAJt+tJdiLCkMt+RwAp8VXs4o7xmQA1FCSJ/3SridUPsUIAofnuKFxX6GVByndTP1YRN7xeEiVfSJecFhGY+7V5HMOrIINJiTSLt/XutsZ7PnFBC56XuTwglLC3/iReR0HuFOT/BsSziIsNHyXlcbMk4BQk2b7DRQQNQXPqsS1s0qHH4V+pwX7D2EtLtUbQ4lm0Cbm0j70dAnXhg5QmaRsHnzJVmKUEubT7RAC3erd4DPlMNQ5Hvtw519flm4QWuLPuBhLzUaMLfD/ZJBcLP3RB4gOaBQaZ6NuXjS8DDMIR8tR8gsB0mozR0EGptPJFlPbXuQTqiRBrAv8qZNw1MdX5Y1k2YXlgrruaZohVhPDg8/Au3zuVsBzUWk3TSDlUsia3TILCcYPwz0XFmSQAMaJJck0BIXz3WBFQrNPLsciJOon6I4oC/kyCnsWS9JoEV6+CcRaDAHkYYRqL1JIRs+iayRi2wK+GzmWEVFDlq0Bw3vcAkhTqBdwu1TLKAOeM8RFnvTpUdfiV7XbVy97RdEkeRIwZhMoM1BpPHwStnIhpLDIzMlc6vCSxVqkbCuL498gZ58peADRHifIrEf1mWX6mI6upfodd2Lq/b8r6JEchwGJhVotYs0PA3Eh2uGDf/Bmt9AB+aUNzRrt/oG8KKVHLL6WYc1KMbDSLJLO1ym9By0TRDFULVwPeQQaGnN/37Kx1JruJN5lfSMmvThjSTHhl8Kc6jCm71bfQPMUxSCmbHbctEQOSUL+m0ov7Eeoqs4EWgndljz4awbsN6lFxN5ILnd2Wm495OVizPIseGXBN40ROk2I18qOU5tk7vVN9DFe9IXDCBl7G83f3juiAq7d/q+uOgFhQJndvju4nGtPSrw2V5PRkwF3tpo/VGEQIN1Ig0P1TZIBifR3QsMwddaF8P4vtb8u9oLA9rUmLMxlk+a2RNjLzIBOQQaoiV7aXdHvNsT4AVvH7Q4GFKhfU9P48tz41rCH57t3Y2Y7hKxeKjgvMWu5BxvJoaRI5zO6L1iHArrRNoU/KSQbuo5oDKw5pDAUI4c+ocTkkugcWrrshHmxnse615zRzmIIVQZrdW1yvmGQp9bjeDJZR4nhRgIrld7vAmEfLRnIxc1e/znTi6B1qU4JhuliLSlwKbPzMMpScYYg0zS9akrNxMZxuZ1aspNyynQijm1tTjBcaEypmWb8UOokvtEv8Bt4Ol5YNsvFQzewy6pJQgg+nh5wWHJMzJRQnuWdc9xqC07pCQvithPDoFWymzkA5BIywthzq5eAg/SRkZIiLFZ68TAOuHEafIYM/uc2U5pusc9s9l0CaWXwn3B3oFiElMz8d2Or9PFg8NB40J50Yogd3uWlJv8rFmnIe/YMlItTjazi8wU0qyQHAUppcxG3kWt1Z01grHIFebkZElo6SNmdn2TC9bHW8Pv4vWgBx3XIBz3zRof+kA4tXnnYq2yNIHG++2z/vbyMKXWO78b+NkKP8hNzmHTWD/kMh7aeFrJbe36+bPu+H1s2UlmO57ELh5MUQY5+oiWMnpvLRJp+fhGhpfC+GDIvN22eDcQe1w7h1GekhxudUr9+4iW2unriWXodQoH8k9CpRwUPjCD1jtz4tYMbwZ7c0QjtLoKs70g1It93CTW3srwnkQ3cgi04hviK9yZB06ckZ4ZqmP/vmey7xAwkpxI7zLb2Uj7JAvzZSidHAJtr+T5OUOOX9fiCDwfNVYCLwly0aJt2hec8+dWSWKNQol08MRj13WNilhyCbTiG+LLk5aH6wJfBgNDvkWXXB4v8AKR4I2HoysUKpSMBNpuXnH8wE5xvJaYHnLRouBAh03zLHDYBIfOJNJoOSKmB6dG9GzkUvtS7kKetHg4cfYRM33AbT9lfgVFBy91/EI91ueNZSaHQOtS3Vga7zre0C2NsBf1g1c0Ku1his0zzX+m9YiYFnK3t1WBj2WKNTYYedLi+XLQSxA2m1KgJfhCcS/biP7iDeWcwA0nwYZWU/uRhKcng9A4BljUz1lBb2HKzROhljMaIXaTY1RiyY3D1yKRFs8VAS/hXRgwFgTYXt5CxKTnhu8FeQ+Pel1sA0VXDnXAM5fw6g6vJ8onKn2DEWTKCVsmuQRaqY3DNyKRFgsd271HjdAKowQPWhvyOShgWEeUUR9DjsRUPqcUSqkVz6pkBCvPXdQL6Rt9Coa6wsFzSRXP4n1YUzSw7lsF3odq2x5JpMVCw01PEEGMwikRTsBUY7VhYy7N+OYQaHigLi/xg+oJTUM9YQi3wp71cnrArfNdKfHgKeIhvzF67mu1Ag0k0mKhw7Un1xYeDiCkuRoeQ6Dd5vkAHMgl0EodmN4X2q54bqCclp8y2zHOoj4i8tGurO8xCAc0eq8DEmlx4ML1DHWyUZaafL/KvzT/hw7hhPpKyjEh/Bxd2l1dYmoHburwO33ge/G4hFqVXOJ81xzqSsxXFbHkEGhQfeNwibQ4/sr50t4bZRQ/bLp5l9aMlBBb9HD75FYvSZh6wCbq3XKBvCYJtbrgO+SdN5QOdWI55BJos2gcLpEWB8PJvajptIlAKe1knLNyqLT8Oy8IWyNCPZFQq4tjnG+X9VRDdED48tWg4pNVZiHQQCItjmMdL+1ZYbc0cgg0oLR7rgINEN8R7WQk1OqBTvCelJavKuLJ0Th8NgJNIi0Wz7l23hV2S+H4DKXdgFGYs0BLEML27JuWkFCrg08536bs2rK4JyBtok2Nk132RJ60GCga8IK2G1TYif6QoO6dQ9NmVqe2LeBJiZrBKqFWPoc73+KbztcTZRPRX2+VWie7SKRNgKcxu3eC+xfdWIpAwyvMjFY2VU8PcRsJtbLx/Ox1+BSe1D7ZZSPypMVwqONl33a8lvADozD3pOdUEfsd53YyeyGhtgyeWcbbFBlgCk/tk10k0jJzguPrzV0I1MhsT20rMHj+1xmqsNYhoTZ/Xpj/WxQZIEe21Ck8LsiTJkQ/liDQqMCKHjy/DQm1svDMs60Bz2iIiAGBNpfJLhs5OObZCUdK6zm2dObeNiBHiXxXklAbY4jvMHPLEWV80VKLeDzzbOGdrotgIjyjISIGvo9zaxy+C4k0IfpBl/wxoqFkShJoiTFCjZAtJfkeMJZtqQItgtciLurIhxyvJWIgFWju/SkV7hSiJ4iG+3r+TQ1cm6GH0VCGhD4ZPeNZGV3LWLZaOK7wGz218PsTf2iv9NTcZwArJ618qLATZUErArxOc4HB81RIlUxfoXaVY4888hCVduDLYb6Xc4dG2KJ86IU56xnAEmnlc0j5t7hI2LjnINTwOEUPnveiq1Ajyd1TdH7d6w1UzNJEKpu/qIOudqFKJNJieCXmsqIwEGrkPdUMw46jpzJ40sUgM37GCz5j5aL5U3LOl6IX9YFdwJbNDom0GN51vGzpuRslQ7I3m2wktKo4LfIFAsHjFPV88GQdaWa/Crj/vYQao6u8OuNz7/KixXB+zGVd+KTLVUSb84LsQWIu0Y0DkEiLwXO+4Vkxt7gY6ESNWIvkObOdvK7a+ErQDVNReX2Tx0X1VU6h9rDje6JJprxo70NfKi+i5ziOQTY3Bip6z4659AFCjSKo2SCRFoOnYfdqIbBkLjdz3WDWQV5XTWESctEivGjMM71z5QH9timTzyHU8KB55RJxvw8s+UuzBs/DJ+D1LJFLSrypmfCq2Y6NiAQvfq3RjV1IpMXheeos1ZjVAg0P6W3m+Zm0Ia/r5YqE2ikBH96mgfMItaODnn8KfSKQmTHqBV602TfK7MnzPX9/GyVupKyjmnI0a4T+ZoQ+IyG6UeL66o1EWhw/cLx09IJeAmy4lwaF3hI19e25xvlD3yTQEniXo4QyQo05o178WF60tbzp9YAbbnS+ngdf9LiI2MoTQZ78VWpNQzkAibQ4XnS8NFUrhKfEOCJDb4la+vZ4JdcDOX+cjreRw6PpATkt8qLtxntKAN+V0qIEs6wQLBTyhSNSLlapLQ1lFxJpcfzI8dJ4aJQn4QNCLdoN3qVNxJR4b4x9uvGXLtTwonURnEskolfalwp6kNgFhTrzEl3YVVsaikRaRhADnsnSt8ub5gabTXTyasl9ezzbuiBq+m7eJQu1WVWGBeBdKY0nhVYwJXBLCTexQKILu5JQqzIaJU9aLHc7Xl7eNF/wlkQLtVL79pzs+Cj/a+C1ShRqXcO2S8a7eABuLeCB4l0uuS3InMlhC9g/qxwfJZEWy0POl8ebVlqbBzwP3uGzXCDUonMiuL5n/pcHx3pcpOFnI66Vwzj3oU/Ydql8N+CN02Zo6j6DnlMqRH9yFHaVnoayFom0WOgJ4xnyLM1tSw4HPWmo+qo1TJQjeZXWENF5cFPRN9TZphShhhdt7HtZAt5pHAkSvKcKR3GIkhdtenIUdvE54+yoBom0eDxDnlCK2xbRQYlzArGGoS0lv6QP0cmrUFLfnuP7PJwteHhRSxBq8qJ1x9umJbs2xebp3V9PjCNHYRee25vH3WY+JNLiuSvgJaY+DbQFWoL7eqOA0MUQopNXk1ArIVz950Me0AaOcrrWlEKNkLS8aN2JsGmQe/PEc3d/97ctMpGjsKvUfOFdSKTFw8nAuyIqGbQpPFfntDxobVJIlpPKVOGLIeQSCSVMJXh6yAPawEWO18r1GbTREPV+YNOo6o0g1+aJx59EcoU5yyRXYVfxaSgSaXn4t6CXSZ6rHAsNDxCi8NGO7wVjixEswXPUFUTChc55hJtEbI1h4XV4NyTNLdRYp56zdpdCZA4qnwl5nFG2g+vi8ZdAK5schV0lpaGsRSItDxQQRHjTAM8VC+2OQM8VibWM3elr1Ph9PEc5RKQXbNgnZhBqVP7W5GncC+8WCgi1szNU3lLUIy/aMNhAo7xpkGyOd2U0VaTYJDWtrYMchV1FCzWJtHxEJyaTz/GLJiHSw0vDaZPT8ksjB1fnEJHepCqjSKYsB3/M+Y2xkUYI8WgDzeFJXrThRHrTEnjUsEGkWYw51LA+uY4EWn3kKOx6MNBzOwqJtHyQDBnlTUsgiAgVvNuEJlMPs67GjUq9JMzwnFGxSTjLA0Qk80yjQhjeINSim90i1O7zvvEORCTJcxr1/mzZmK/q8H6GwvOPEJdLIdqblsAGkWbxf03EgM+sy0GU9cgB4pdNtMHLlon8RBd2FTs+6uD8z3rRXGlmZ2RytbMB8YPQAkI7mxLGc90TRhLxd56ZPVHBSkjJq6utRrxhE/mp2c5pMRevB71QCm2PFYEcFmgu2je8PgQ+2yNV3TkYDnWR3482HPb4SWyya95hUjEtKVc1stgjCbWjS/KwS6TlhdDKDSPDh0NhAZZiuDgV41XkdMSXr2QQamwKSexGkKYe5BJqqTrP27PAGqOxMc+LXlp9Plu8vaeY2TUTrFM+Y/IQeS6iHzw7vstT2ZaS7JqIJRV2UfQRlVPIdckX/nxP+xWGwp35waBFhz1rAO/dn9Zwo2Z2Z4YkdoRaztDbvYHPHkG7LTSFKMNjRkiTdi3kU+KRmWKzLzbUUQlECDwnqwixiRyFXVPmC+9CIm0a8CAt3ahdXJnnAi9XpDcNclYZdW2lMgY8arwnciQ5Ba/+IOLwunEfCNSok3FXJNSGw8Z5xfA/F6IXuQq7psgXlkgrBDarnF6T0mDzJkxSG4Sqvx9804iaHMOmcxSy1IaE2nDIMVWEQOQiR2EXXv3Jx0fJkzYdOUZflAiGnPBhjeRqtErTYO9KyXV8q8YPIRgJteFEV+AJsUquqQSTCjWJtGnJschKAi8Uhrxmck4liBZqKelbHIiE2jDSIWbpqRwiH6mwKxLSMabIld1BIm16liLUEGjFVMyMJEfyKkLhqZENPLtwXZdfWiASasNAqEVP7BBilRyFXTRVniRFSSKtDOYu1OYk0BI5kldpkUFfoK7NiIfA+7hsyB8uAAm1YaTvRs0etdQWR9TB3Aq79iORVg6pV1PNhm0dVETOxYPWJkfyaioHj4Q8QW1K65FQG0YSapHzPSPA/uIJ/HbExUUouQq7otNQDkAirSyYJYiBiK4gzAWTBa4vpSlgEDm8oAi16OTVHPPxchAhCiTUhoFQO7kie5YEGnZY1Eeuwi4mq2QTahJp5YFhw/O0OvqkNjB2jNqpYfSTBwi16JAhnq5oocZ7qNWjljbYKFEgoTaMtHGWvq7w+B9RWe9GsZscxStZbYFEWpmw0EiGROjU5lXDGGPsxs5vrI0cIcMcVUZ41ErfUNvw7FlzeEAiRUFW4zwj+ExYVyUWFCDul+DxXxI5ilewBfcH5wvvIJFWNgids83sM2YhYRxP2Cg/3BjjPjMb50QOgZOjyqjUDbUNoU2+G3gAV9dcEgURYlNCbTiIaMR0KVECbBbDtJfi8V8SOYpXsoyPkkirA8JphHHYjCJybsaAoeOEzL1pQLXZbRm8nznGR6UNNULojAXvB+vtpC2TK6JEs4TacFajBFNNKOB1iVKwhminI+YJ+xHjByMJL+ySSKsHjBvGhY0JURQ9R3Iv2CTZvA9tDJ0Sbd8nV/LqgxmSV5NHis+5BLGWPGd4Y7pu8Ag1wlneSKiNgygBIinn2loVZ0tLx1gq1Rd2SaTVCaKIqskPNOGeHIKNDZKNGoHIJsnmp1PoeuaWvMrnzOedNtScbWLSgYB1lzxnfcPphLMIi3ojoTae1bWFmO4qvrtCTi9ikFQM/ilxtjyqLuw6eHmf16xgs2IB8oNo+5iZHdeERj9ttuOKHQIb49Nm9ryZvWlmz0qQ9SYlr1KuzWYeQRIJ5NXkEMxpQ0WwUYL+RTM7f8Q62wQb9WNm9kpTDOAB3xE26pvM7HCPC65wdSNixXBYW4hpfhgd93Ezu9DMju05koe18xsze1J2S6zAujgqOCKAE+Nt79nUB+3bt2+IN40O6B91XALvBeczfdDZMGMEcmyKXiDeEh9pxBy8Y2avtV5kypMmn9MFXm+6OTWzOU8JYubM4BvwFDNDSQeEw5oLnNvxQhwEMGy8Bw4Hyms8EG/b9VbFfQtX7Vgbb5vsbYuwQ31t617vdwh9X997XuUjBeyb55jtt1FRPOD5HRsq0oQQQgghRCBDvGhCCCGEECIYiTQhhBBCiAKRSBNCCCGEKJD/B6nKkmTMdKeOAAAAAElFTkSuQmCC" alt="tick&amp;talk">
+    <div class="toggle" id="toggle">
+      <div class="pill" id="pill"></div>
+      <button data-m="kolb" class="on">Option A<span class="lg"> · Experiential</span></button>
+      <button data-m="game">Option B<span class="lg"> · Game + Kolb</span></button>
+    </div>
+    <span class="navtag">Advanced Communication · 2026</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="glow"></div><div class="ring"></div>
+  <div class="wrap">
+    <div class="eyebrow">Advanced Communication Skills for Teams · 2 Days</div>
+    <h1>Same goal. <span class="o">Two very different</span> experiences.</h1>
+    <p class="lead">Step inside the training room for each delivery option. See how the room is set up, where learners move, what they go through step by step, and how the two days feel from start to finish.</p>
+    <div class="choice">
+      <div class="c on" data-m="kolb"><span class="chip">Viewing</span><div class="k">Option A</div><h3>The Experiential Workshop</h3><p>Kolb's Learning Cycle. Eight separate modules, each one a full loop: Experience → Reflect → Concept → Practice.</p></div>
+      <div class="c" data-m="game"><span class="chip">View</span><div class="k">Option B</div><h3>Game Day + Experiential Day</h3><p>Day 1 is one continuous board game covering two frameworks, Thomas–Kilmann and Tuckman: teams play, meet on a shared board, and the trainer pauses the game to debrief. Day 2 switches to the Kolb cycle.</p></div>
+    </div>
+  </div>
+</header>
+
+<!-- ROOM -->
+<section class="blk" id="room">
+  <div class="wrap">
+    <div class="sh">
+      <h2><small>01 · Inside the room</small><span id="roomTitle">A room that moves through the cycle</span></h2>
+      <p id="roomSub">Press <b>Play</b> to watch the room in motion, or pick any step below. Every dot is a participant.</p>
+    </div>
+    <div class="room">
+      <div class="stage">
+        <div class="stagebar"><div class="loopbadge" id="badge"></div><div class="mini"><button class="btn sm" id="prev2" aria-label="Previous">‹</button><button class="btn pri sm" id="play2">▶ Play</button><button class="btn sm" id="next2" aria-label="Next">›</button></div></div>
+        <svg id="svg" viewBox="0 0 900 540" aria-label="Training room plan"></svg>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="panel">
+        <div class="k" id="pK">Module 1 · Step 1 of 4</div>
+        <h3 id="pT">Activity</h3>
+        <div class="meta" id="pM"></div>
+        <div class="row"><b>What happens</b><p id="pD"></p></div>
+        <div class="row"><b>What learners experience</b><p id="pG"></p></div>
+        <div class="row"><b>The trainer's role</b><p id="pTr"></p></div>
+        <div class="ctrls">
+          <button class="btn" id="prev" aria-label="Previous">‹</button>
+          <button class="btn pri" id="play">▶ Play</button>
+          <button class="btn" id="next" aria-label="Next">›</button>
+          <div class="prog"><i id="progBar"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="blk">
+  <div class="wrap">
+    <div class="sh">
+      <h2><small>02 · The learner's journey</small><span id="jTitle">Eight loops of the same cycle</span></h2>
+      <p id="jSub"></p>
+    </div>
+    <div class="jgrid">
+      <div class="jcard"><h4 id="j1h"></h4><p class="s" id="j1p"></p><svg id="jsvg1" viewBox="0 0 520 330"></svg></div>
+      <div class="jcard"><h4 id="j2h"></h4><p class="s" id="j2p"></p><svg id="jsvg2" viewBox="0 0 520 330"></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section class="blk">
+  <div class="wrap">
+    <div class="sh">
+      <h2><small>03 · The toolkit</small><span id="tkTitle">The toolkit</span></h2>
+      <p id="tkSub"></p>
+    </div>
+    <div class="tk fade" id="tk"></div>
+    <p class="tknote fade" id="tkNote"></p>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="sh">
+      <h2><small>04 · At a glance</small><span>What changes between the two</span></h2>
+      <p>Both options share the same research base, the same group size (15–20 participants, teams of 3–4) and the same learning outcomes.</p>
+    </div>
+    <div class="cmp">
+      <div class="m"><div class="t">Tools covered</div><div class="v" id="c1">8</div><div class="d" id="c1d"></div><div class="meter"><i id="c1m"></i></div></div>
+      <div class="m"><div class="t">Time in practice</div><div class="v" id="c2">65<small>%</small></div><div class="d" id="c2d"></div><div class="meter"><i id="c2m"></i></div></div>
+      <div class="m"><div class="t">Content load</div><div class="v" id="c3">Rich</div><div class="d" id="c3d"></div><div class="meter"><i id="c3m"></i></div></div>
+      <div class="m"><div class="t">Behavioral change*</div><div class="v o" id="c4">~60<small>%</small></div><div class="d" id="c4d"></div><div class="meter"><i id="c4m"></i></div></div>
+    </div>
+    <div class="roles">
+      <div class="m"><div class="t">The learner is a</div><div class="v" id="r1"></div><div class="d" id="r1d"></div></div>
+      <div class="m"><div class="t">The trainer is a</div><div class="v" id="r2"></div><div class="d" id="r2d"></div></div>
+      <div class="m"><div class="t">Best suited for</div><div class="v" id="r3"></div><div class="d" id="r3d"></div></div>
+    </div>
+    <p class="foot-note">* Expected share of participants applying the tools on the job, measured through a 30-day post-program follow-up.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="data:image/png;base64,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" alt="tick&amp;talk">
+      <p style="margin-top:14px">We would love to hear from you and become your partners of success.</p>
+    </div>
+    <div class="ct"><a href="mailto:info@tickandtalk.com">info@tickandtalk.com</a><span>+966 55 669 5303</span><span>+966 11 500 1317</span><span>tickandtalk.com</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+const O='#FF7600';
+const CREW=['#FF7600','#F2F2F2','#FFB066','#9C9C9C','#FFD7B0'];
+const N=18;
+const SMALL=window.matchMedia('(max-width:600px)').matches;
+const PR=SMALL?11:7.5, TR1=SMALL?24:16, TR2=SMALL?15:10;
+const crewOf=i=>i<4?0:i<8?1:i<12?2:i<15?3:4;
+
+/* ---------------- CONCEPT DATA ---------------- */
+const KSTAGES=[
+ {key:'exp',name:'Experience',sub:'Concrete Experience',zone:['k-tables'],
+  what:'At their tables, teams are placed inside a designed experience: a challenge, a simulation or a role-play that recreates a real communication situation.',
+  feel:'They live the problem first, before any theory. Reactions, assumptions and habits show up naturally.',
+  tr:'Sets up the experience, then steps back and observes.'},
+ {key:'ref',name:'Reflect',sub:'Reflective Observation',zone:['k-flip'],
+  what:'The trainer leads a reflection on the flipchart. Teams look back at the experience together: what happened, what they assumed, where it turned.',
+  feel:'They notice their own patterns, and see that others experienced the same moment differently.',
+  tr:'Asks questions and captures the room\'s insights on the flipchart. No lecturing yet.'},
+ {key:'con',name:'Concept',sub:'Abstract Conceptualization',zone:['k-front'],
+  what:'The concept is explained on the trainer screen: one focused, research-based model that explains what the room just lived. Short and visual.',
+  feel:'A clear model that puts words to their experience: "So that is why it happened."',
+  tr:'Teaches the concept and links it directly to the experience.'},
+ {key:'pra',name:'Practice',sub:'Active Experimentation',zone:['k-tables'],
+  what:'Learners practice the concept on real workplace situations, in pairs and small groups at their tables, with feedback from each other and the trainer.',
+  feel:'They try it themselves and build confidence before taking it back to work.',
+  tr:'Moves between the groups, coaches and gives feedback.'}
+];
+const LOOPS=8;
+const GSTEPS=[
+ {k:'Kick-off',sub:'The game begins',pos:'tables',lvl:0,zone:['g-tables','g-front'],
+  what:'The storyline and theme are revealed. Participants are split into teams, and each team gets its own board game and a shared mission.',
+  feel:'From the first minute they are players with a goal, a team and a reason to communicate.',
+  tr:'Game Master: opens the story and explains the rules of the world.'},
+ {k:'Teams play',sub:'Each team on its own board',pos:'tables',lvl:1,zone:['g-tables'],
+  what:'Each team plays on its own board. Every move needs the team to share information, decide and agree.',
+  feel:'Real communication under game pressure: who speaks, who listens, how decisions get made.',
+  tr:'Runs the game and observes quietly.'},
+ {k:'Teams interact',sub:'The game connects the teams',pos:'meet',lvl:1,zone:['g-center'],
+  what:'At set points the game brings players from every team to the shared board game in the middle, where they must exchange, negotiate or align before anyone can move forward.',
+  feel:'Communication across teams, with different goals and limited time, just like cross-functional work.',
+  tr:'Triggers the interaction and keeps the game moving.'},
+ {k:'Pause & debrief',sub:'The trainer freezes the game',pos:'ring',lvl:1,zone:['g-center','g-front'],pause:true,
+  what:'The Game Master freezes the game. Everyone gathers around the shared board while the trainer goes to the leaderboard and explains why the results came out this way. Then one concept is revealed.',
+  feel:'The game experience turns into a clear concept, and they know they will need it in the next level.',
+  tr:'Stops the game, walks the room through the leaderboard results, and introduces the concept.'},
+ {k:'Back in the game',sub:'Next level, harder',pos:'tables',lvl:2,zone:['g-tables'],
+  what:'Play resumes at a harder level. The concept from the debrief is now what the teams need in order to win.',
+  feel:'They practice the new concept right away, inside the story and under pressure.',
+  tr:'Raises the challenge and watches for the new behavior.'},
+ {k:'Teams join forces',sub:'Alliances form',pos:'alliance',lvl:2,zone:['g-tables','g-center'],
+  what:'The next stage can only be won together. Teams form alliances around the shared board and must agree on one joint plan.',
+  feel:'Working through competing goals and real tension between teams to reach one decision.',
+  tr:'Introduces the shared challenge and observes how alliances form.'},
+ {k:'Pause & debrief',sub:'The trainer freezes the game',pos:'ring',lvl:2,zone:['g-center','g-front'],pause:true,
+  what:'The game is paused again. The trainer uses the leaderboard to show how each team performed and why, then reveals the next concept.',
+  feel:'Each debrief builds on the last one, so the learning keeps adding up level after level.',
+  tr:'Explains the results at the leaderboard and reveals the next concept.'},
+ {k:'Final challenge',sub:'Everyone, one mission',pos:'final',lvl:3,zone:['g-center','g-front'],
+  what:'All teams come together on the shared board for one final mission that needs everything they have learned throughout the game.',
+  feel:'Peak energy. Every concept is used together, under pressure, as one room.',
+  tr:'Runs the final mission and scores the result and the quality of communication.'},
+ {k:'Day 1 debrief',sub:'From the game to work',pos:'ring',lvl:3,zone:['g-center','g-front'],pause:true,
+  what:'The whole game is mapped back to real work situations, and it sets up Day 2.',
+  feel:'A shared, memorable experience that is now linked to their daily work.',
+  tr:'Closes the game and bridges it to Day 2.'}
+];
+
+/* ---------------- ROOM BASE ---------------- */
+const svg=$('svg');let people=[];
+function base(){
+  svg.innerHTML='';
+  const defs=el('defs',{},svg);
+  const pat=el('pattern',{id:'grid',width:30,height:30,patternUnits:'userSpaceOnUse'},defs);
+  el('path',{d:'M30 0H0V30',fill:'none',stroke:'#1b1b1b','stroke-width':1},pat);
+  const g=el('radialGradient',{id:'og'},defs);el('stop',{offset:'0%','stop-color':O,'stop-opacity':.55},g);el('stop',{offset:'100%','stop-color':O,'stop-opacity':0},g);
+  const f=el('filter',{id:'sh',x:'-20%',y:'-20%',width:'140%',height:'140%'},defs);el('feDropShadow',{dx:0,dy:4,stdDeviation:5,'flood-color':'#000','flood-opacity':.6},f);
+  el('rect',{x:20,y:20,width:860,height:500,rx:20,class:'wall'},svg);
+  el('rect',{x:22,y:22,width:856,height:496,rx:18,fill:'url(#grid)'},svg);
+  el('path',{d:'M820 520 v-6 h-50 v6',fill:'none',stroke:'#3a3a3a','stroke-width':2},svg);
+  el('text',{x:795,y:508,class:'lbl sm','text-anchor':'middle'},svg,'Entrance');
+}
+function zone(id,label,lx,ly,hl){
+  const g=el('g',{class:'zone',id},svg);
+  if(hl)el('rect',Object.assign({class:'hl'},hl),g);
+  if(label)el('text',{x:lx,y:ly,class:'lbl','text-anchor':'middle'},g,label);
+  return g;
+}
+function makePeople(){
+  const layer=el('g',{id:'people'},svg);people=[];
+  for(let i=0;i<N;i++){const g=el('g',{class:'p'},layer);el('circle',{cx:0,cy:0,r:PR,fill:CREW[crewOf(i)]},g);people.push(g);}
+}
+function trainer(){
+  const tr=el('g',{class:'trainer',id:'trainer'},svg);
+  el('circle',{cx:0,cy:0,r:TR1,fill:O,class:'pulse'},tr);
+  el('circle',{cx:0,cy:0,r:TR2,fill:O,stroke:'#fff','stroke-width':SMALL?3.5:2.5},tr);
+}
+function place(list){list.forEach((p,i)=>{people[i].style.transform=`translate(${p[0]}px,${p[1]}px)`;});}
+function moveTrainer(x,y){$('trainer').style.transform=`translate(${x}px,${y}px)`;}
+function setZones(ids){svg.classList.add('dim');svg.querySelectorAll('.zone').forEach(z=>z.classList.toggle('act',ids.includes(z.id)));}
+function seatPos(cx,cy,r,seats){const a=[];for(let i=0;i<seats;i++){const t=(i/seats)*Math.PI*2-Math.PI/2+Math.PI/seats;a.push([cx+Math.cos(t)*(r+15),cy+Math.sin(t)*(r+15)]);}return a;}
+function ring(cx,cy,rx,ry,n,off){const a=[];for(let i=0;i<n;i++){const t=i/n*Math.PI*2+(off||0);a.push([cx+Math.cos(t)*rx,cy+Math.sin(t)*ry]);}return a;}
+
+/* ---------------- KOLB ROOM ---------------- */
+let K={};
+const KT=[[230,235,4],[450,235,4],[670,235,4],[340,400,3],[560,400,3]];
+function drawKolb(){
+  base();
+  // screen
+  const front=zone('k-front','Trainer Screen',450,98,{x:320,y:26,width:260,height:84,rx:12});
+  el('rect',{x:340,y:32,width:220,height:9,rx:4,fill:O,opacity:.85},front);
+  el('ellipse',{cx:450,cy:60,rx:110,ry:26,fill:'url(#og)',opacity:.35},front);
+  // flipchart
+  const flip=zone('k-flip','Flipchart',100,150,{x:36,y:28,width:128,height:148,rx:12});
+  el('path',{d:'M82 128 L100 64 L118 128',fill:'none',stroke:'#3a3a3a','stroke-width':2},flip);
+  el('rect',{x:74,y:44,width:52,height:62,rx:3,fill:'#e9e9e9'},flip);
+  const fl=el('g',{id:'flipLines'},flip);
+  [54,64,74,84,94].forEach((y,i)=>el('line',{x1:80,x2:80+[38,30,40,26,34][i],y1:y,y2:y,stroke:i%2?'#999':O,'stroke-width':2.4,'stroke-linecap':'round',class:'fline',style:'transition:opacity .4s '+(i*0.18)+'s'},fl));
+  const links=el('g',{id:'links'},svg);
+  // tables
+  const tables=zone('k-tables','Team Tables',450,505,{x:170,y:160,width:560,height:320,rx:18});
+  K.seats=[];K.cards=[];
+  KT.forEach(([x,y,s],ti)=>{
+    const sp=seatPos(x,y,40,s);
+    sp.forEach(([cx,cy])=>el('circle',{cx,cy,r:9,class:'chair'},tables));
+    el('circle',{cx:x,cy:y,r:40,class:'tbl',filter:'url(#sh)'},tables);
+    // activity materials on table
+    const cg=el('g',{class:'cards',style:'opacity:0;transition:opacity .5s'},tables);
+    el('rect',{x:x-16,y:y-12,width:14,height:18,rx:2,fill:O,transform:`rotate(-12 ${x-9} ${y-3})`},cg);
+    el('rect',{x:x+2,y:y-8,width:14,height:18,rx:2,fill:'#F2F2F2',transform:`rotate(10 ${x+9} ${y+1})`},cg);
+    el('rect',{x:x-6,y:y+4,width:14,height:18,rx:2,fill:'#FFB066',transform:`rotate(4 ${x+1} ${y+13})`},cg);
+    K.cards.push(cg);
+    sp.forEach(p=>K.seats.push(p));
+    // lines to flipchart & screen
+    el('line',{x1:100,y1:110,x2:x,y2:y,class:'beam ref'},links);
+    el('line',{x1:450,y1:42,x2:x,y2:y,class:'beam con'},links);
+  });
+  trainer();makePeople();
+  // speech bubbles for practice
+  const bubs=el('g',{class:'bubs',id:'bubs'},svg);
+  let bi=0;
+  KT.forEach(([x,y,s])=>{seatPos(x,y,40,s).forEach((p,i)=>{
+    const g=el('g',{class:'bub',style:'animation-delay:'+((bi*0.37)%2.4).toFixed(2)+'s'},bubs);bi++;
+    const bx=p[0]+(p[0]<x?-30:6),by=p[1]-26;
+    el('rect',{x:bx,y:by,width:24,height:15,rx:7,fill:'#F2F2F2'},g);
+    el('path',{d:`M${bx+(p[0]<x?18:5)} ${by+15} l${p[0]<x?4:-2} 5 l3 -5 z`,fill:'#F2F2F2'},g);
+    [0,1,2].forEach(k=>el('circle',{cx:bx+7+k*5,cy:by+7.5,r:1.6,fill:'#111'},g));
+  });});
+  // practice: partners lean toward each other
+  K.pra=[];let k=0;KT.forEach(([x,y,s])=>{const sp=seatPos(x,y,40,s);sp.forEach((p,i)=>{let q;if(s===4){q=sp[i^1];}else{q=[x,y];}K.pra.push([p[0]+(q[0]-p[0])*.12,p[1]+(q[1]-p[1])*.12]);});});
+  $('legend').innerHTML='<span><i style="background:'+O+'"></i>Trainer</span><span><i style="background:#F2F2F2"></i>Participant (colour = team)</span><span><i style="background:transparent;border:1.5px dashed '+O+'"></i>Focus of this step</span>';
+}
+function kolbState(si){
+  const st=KSTAGES[si];
+  document.querySelectorAll('#links .ref').forEach(b=>b.classList.toggle('on',st.key==='ref'));
+  document.querySelectorAll('#links .con').forEach(b=>b.classList.toggle('on',st.key==='con'));
+  document.querySelectorAll('.fline').forEach(l=>l.style.opacity=(st.key==='ref'||st.key==='con'||st.key==='pra')?1:0);
+  K.cards.forEach(c=>c.style.opacity=st.key==='exp'?1:0);
+  $('people').classList.toggle('talk',st.key==='pra');$('bubs').classList.toggle('on',st.key==='pra');
+  place(st.key==='pra'?K.pra:K.seats);
+  moveTrainer(...{exp:[560,318],ref:[150,100],con:[600,64],pra:[340,318]}[st.key]);
+  setZones(st.zone);
+}
+
+/* ---------------- GAME ROOM ---------------- */
+let G={};
+const TBL=[[160,175],[160,395],[740,175],[740,395],[450,462]];
+const BW=96,BH=58;
+function boardPath(cx,cy){const x0=cx-30,y0=cy-17,w=60,h=34;return [[x0,y0+h],[x0,y0],[x0+w*.5,y0],[x0+w,y0],[x0+w,y0+h*.5],[x0+w,y0+h]];}
+const SB={x:355,y:205,w:190,h:140};
+function sharedPath(){const {x,y,w,h}=SB;const p=[];const n=14;
+  // loop around the board inside, starting bottom-left going clockwise
+  const pts=[[x+22,y+h-22],[x+22,y+22],[x+w-22,y+22],[x+w-22,y+h-22]];
+  for(let s=0;s<4;s++){const a=pts[s],b=pts[(s+1)%4];for(let k=0;k<4;k++)p.push([a[0]+(b[0]-a[0])*k/4,a[1]+(b[1]-a[1])*k/4]);}
+  return p;}
+function drawGame(){
+  base();
+  const front=zone('g-front','Leaderboard',450,98,{x:300,y:26,width:300,height:84,rx:12});
+  el('rect',{x:330,y:32,width:240,height:9,rx:4,fill:O,opacity:.85},front);
+  const bars=el('g',{id:'lbars'},front);
+  [22,30,16,26,12].forEach((h,i)=>el('rect',{x:356+i*40,y:82-h,width:26,height:h,rx:2,fill:'#3a3a3a'},bars));
+  // shared board game
+  const c=zone('g-center',null,0,0,{x:SB.x-14,y:SB.y-14,width:SB.w+28,height:SB.h+28,rx:20});
+  el('rect',{x:SB.x,y:SB.y,width:SB.w,height:SB.h,rx:14,fill:'#1b1b1b',stroke:'#3a3a3a','stroke-width':1.5,filter:'url(#sh)'},c);
+  el('text',{x:450,y:SB.y+SB.h/2-4,class:'lbl','text-anchor':'middle'},c,'Shared');
+  el('text',{x:450,y:SB.y+SB.h/2+(SMALL?20:12),class:'lbl','text-anchor':'middle'},c,'Board Game');
+  const sp=sharedPath();G.sp=sp;
+  el('path',{d:'M'+sp.map(p=>p.join(' ')).join(' L')+' Z',fill:'none',stroke:'#4a4a4a','stroke-width':2,'stroke-dasharray':'4 4'},c);
+  sp.forEach((p,i)=>el('circle',{cx:p[0],cy:p[1],r:i%4===0?4:2.6,fill:i%4===0?O:'#555'},c));
+  
+  // team tables, each with its own board
+  G.tok=[];
+  TBL.forEach(([x,y],i)=>{
+    const g=el('g',{class:'zone',id:'g-t'+i},svg);
+    el('rect',{x:x-BW/2-8,y:y-BH/2-8,width:BW+16,height:BH+16,rx:16,class:'hl'},g);
+    el('rect',{x:x-BW/2,y:y-BH/2,width:BW,height:BH,rx:10,class:'tbl',filter:'url(#sh)'},g);
+    const pts=boardPath(x,y);
+    el('path',{d:'M'+pts.map(p=>p.join(' ')).join(' L'),fill:'none',stroke:'#444','stroke-width':2,'stroke-dasharray':'3 3'},g);
+    pts.forEach(p=>el('circle',{cx:p[0],cy:p[1],r:2.4,fill:'#555'},g));
+  });
+  el('text',{x:160,y:SMALL?106:126,class:'lbl sm','text-anchor':'middle'},svg,'Team boards');
+  // pause overlay
+  const pz=el('g',{class:'paused',id:'paused'},svg);
+  el('rect',{x:20,y:20,width:860,height:500,rx:20,fill:'rgba(0,0,0,.35)'},pz);
+  trainer();makePeople();
+  // trainer speech bubbles at the leaderboard during debriefs
+  const tb=el('g',{class:'bubs',id:'tbub'},svg);
+  [[640,34,0],[664,62,1.2]].forEach(([bx,by,dl],k)=>{
+    const g=el('g',{class:'bub',style:'animation-delay:'+dl+'s'},tb);
+    el('rect',{x:bx,y:by,width:44,height:26,rx:13,fill:O},g);
+    el('path',{d:`M${bx+4} ${by+16} l-10 6 l12 -1 z`,fill:O},g);
+    [0,1,2].forEach(i=>el('circle',{cx:bx+14+i*8,cy:by+13,r:2.6,fill:'#111'},g));
+  });
+  const seats=[];const sizes=[4,4,4,3,3];
+  TBL.forEach(([x,y],i)=>{const s=[[x-22,y-BH/2-13],[x+22,y-BH/2-13],[x-22,y+BH/2+13],[x+22,y+BH/2+13]];for(let k=0;k<sizes[i];k++)seats.push(s[k]);});
+  const t5=TBL[4];seats[15]=[t5[0]-30,t5[1]-BH/2-13];seats[16]=[t5[0]+30,t5[1]-BH/2-13];seats[17]=[t5[0]+BW/2+14,t5[1]];
+  G.tables=seats;
+  // interact: one player per team goes to the shared board
+  const reps=[0,4,8,12,15];const edge=[[SB.x-14,SB.y+40],[SB.x-14,SB.y+SB.h-40],[SB.x+SB.w+14,SB.y+40],[SB.x+SB.w+14,SB.y+SB.h-40],[450,SB.y+SB.h+16]];
+  G.meet=seats.map((p,i)=>{const k=reps.indexOf(i);return k>=0?edge[k]:p;});
+  G.ring=ring(450,275,170,128,N,0);
+  // alliance: teams 1+2 on the left of the shared board, 3+4 on the right, 5 below
+  const Lx=SB.x-16,Rx=SB.x+SB.w+16;
+  const L=[[Lx,215],[Lx,240],[Lx,265],[Lx,290],[Lx,315],[Lx,340],[Lx-22,252],[Lx-22,302]];
+  const R=L.map(([x,y])=>[Lx===x?Rx:Rx+22,y]);
+  G.alliance=seats.map((p,i)=>{const c=crewOf(i);if(c<2)return L[i];if(c<4)return R[i-8];return [[420,SB.y+SB.h+16],[450,SB.y+SB.h+16],[480,SB.y+SB.h+16]][i-15];});
+  G.final=ring(450,275,128,100,N,0);
+  $('legend').innerHTML='<span><i style="background:'+O+'"></i>Trainer (Game Master)</span><span><i style="background:#F2F2F2"></i>Player (colour = team)</span><span><i style="background:transparent;border:1.5px dashed '+O+'"></i>Focus of this step</span>';
+}
+function gameState(i){
+  const s=GSTEPS[i];
+  place(G[s.pos]);
+  moveTrainer(...{tables:[450,172],meet:[450,172],ring:[622,74],alliance:[450,172],final:[450,160]}[s.pos]);
+  $('tbub').classList.toggle('on',!!s.pause);
+        const z=s.zone.slice();if(z.includes('g-tables'))for(let k=0;k<5;k++)z.push('g-t'+k);
+  if(s.pos==='alliance')z.push('g-t0','g-t1','g-t2','g-t3');
+  setZones(z);
+}
+
+/* ---------------- STEPPING ---------------- */
+let mode='kolb',idx=0,timer=null;
+const KTOTAL=KSTAGES.length*LOOPS;
+const BLOOPS=4, GN=GSTEPS.length;
+function total(){return mode==='kolb'?KTOTAL:GN+KSTAGES.length*BLOOPS;}
+let drawn='';
+function ensure(layout){if(drawn!==layout){layout==='kolb'?drawKolb():drawGame();drawn=layout;}}
+function render(){
+  const kolbStep=(k,loops,dayOf)=>{
+    const loop=Math.floor(k/4),si=k%4,s=KSTAGES[si];
+    ensure('kolb');kolbState(si);
+    $('badge').textContent=`${dayOf(loop)} · Loop ${loop+1} of ${loops}`;$('badge').classList.remove('pz');
+    $('pK').textContent=`${dayOf(loop)} · Step ${si+1} of 4 · repeated in every module`;
+    $('pT').textContent=s.name;$('pM').textContent=s.sub;
+    $('pD').textContent=s.what;$('pG').textContent=s.feel;$('pTr').textContent=s.tr;
+  };
+  if(mode==='kolb'){
+    kolbStep(idx,LOOPS,l=>'Day '+(l<4?1:2));
+  }else if(idx>=GN){
+    kolbStep(idx-GN,BLOOPS,()=>'Day 2');
+  }else{
+    const s=GSTEPS[idx];ensure('game');gameState(idx);
+    $('badge').textContent=s.pause?'❚❚ Paused · Debrief':(idx===0?'Day 1 · Game starts':'Day 1 · Level '+Math.max(1,s.lvl));$('badge').classList.toggle('pz',!!s.pause);
+    $('pK').textContent=`Day 1 · Step ${idx+1} of ${GN} · one continuous board game`;
+    $('pT').textContent=s.k;$('pM').textContent=s.sub;
+    $('pD').textContent=s.what;$('pG').textContent=s.feel;$('pTr').textContent=s.tr;
+  }
+  $('progBar').style.width=((idx+1)/total()*100)+'%';
+  const chips=document.querySelectorAll('#steps button');const a=activeChip();
+  chips.forEach((b,i)=>b.classList.toggle('on',i===a));
+  const on=chips[a];if(on){const box=$('steps');box.scrollTo({left:on.offsetLeft-box.offsetLeft-box.clientWidth/2+on.clientWidth/2,behavior:'smooth'});}
+}
+function activeChip(){return mode==='kolb'?idx%4:(idx<GN?idx:GN+(idx-GN)%4);}
+function buildSteps(){
+  const box=$('steps');box.innerHTML='';
+  const sep=t=>{const sp=document.createElement('span');sp.className='sep';sp.textContent=t;box.appendChild(sp);};
+  const kchips=(baseIdx)=>KSTAGES.forEach((s,i)=>{const b=document.createElement('button');b.innerHTML='<small>Step '+(i+1)+'</small>'+s.name;b.onclick=()=>{stop();const k=Math.max(0,idx-baseIdx);idx=baseIdx+Math.floor(k/4)*4+i;render();};box.appendChild(b);});
+  if(mode==='kolb'){
+    kchips(0);sep('↻ then the loop repeats for the next module · 8 loops in 2 days');
+  }else{
+    sep('Day 1 · Board game');
+    GSTEPS.forEach((s,i)=>{const b=document.createElement('button');if(s.pause)b.className='db';b.innerHTML='<small>'+(s.pause?'Pause':'Play')+'</small>'+s.k;b.onclick=()=>{stop();idx=i;render();};box.appendChild(b);});
+    sep('Day 2 · Kolb');kchips(GN);sep('↻ 4 loops');
+  }
+}
+function next(){idx=(idx+1)%total();render();}
+function prev(){idx=(idx-1+total())%total();render();}
+function play(){if(timer){stop();return;}$('play').textContent=$('play2').textContent='❚❚ Pause';next();timer=setInterval(next,2800);}
+function stop(){clearInterval(timer);timer=null;$('play').textContent=$('play2').textContent='▶ Play';}
+$('next').onclick=$('next2').onclick=()=>{stop();next();};$('prev').onclick=$('prev2').onclick=()=>{stop();prev();};$('play').onclick=$('play2').onclick=play;
+
+/* ---------------- JOURNEY ---------------- */
+function journeyKolb(){
+  $('jTitle').textContent='The same loop, again and again';
+  $('jSub').textContent='Learning happens in separate, complete loops. Each module is its own loop, and the learner goes around it 8 times in 2 days.';
+  $('j1h').textContent='One module = one full loop';$('j1p').textContent='About 75 minutes from experience to practice.';
+  $('j2h').textContent='8 loops across 2 days';$('j2p').textContent='Each loop starts fresh with a new experience and a new concept.';
+  const s=$('jsvg1');s.innerHTML='';
+  const cx=260,cy=170,R=105;
+  el('circle',{cx,cy,r:R,fill:'none',stroke:'#2a2a2a','stroke-width':14},s);
+  const arc=el('circle',{cx,cy,r:R,fill:'none',stroke:O,'stroke-width':14,'stroke-linecap':'round','stroke-dasharray':`${2*Math.PI*R}`,transform:`rotate(-90 ${cx} ${cy})`},s);
+  arc.animate([{strokeDashoffset:2*Math.PI*R},{strokeDashoffset:0}],{duration:5200,iterations:Infinity,easing:'linear'});
+  const pts=[[cx,cy-R,'1','Experience'],[cx+R,cy,'2','Reflect'],[cx,cy+R,'3','Concept'],[cx-R,cy,'4','Practice']];
+  pts.forEach(([x,y,n,t],i)=>{el('circle',{cx:x,cy:y,r:22,fill:'#151515',stroke:O,'stroke-width':2},s);el('text',{x,y:y+5,'text-anchor':'middle',style:'font:700 15px Poppins;fill:#fff'},s,n);
+    const off=[[0,-34],[34,0],[0,46],[-34,0]][i];const an=['middle','start','middle','end'][i];
+    el('text',{x:x+off[0],y:y+off[1]+4,'text-anchor':an,style:'font:600 14px Poppins;fill:#eee'},s,t);});
+  el('text',{x:cx,y:cy-2,'text-anchor':'middle',style:'font:700 26px Poppins;fill:#FF7600'},s,'×8');
+  el('text',{x:cx,y:cy+18,'text-anchor':'middle',style:'font:500 11px Poppins;fill:#999;letter-spacing:2px'},s,'LOOPS');
+  const s2=$('jsvg2');s2.innerHTML='';
+  [1,2].forEach(d=>{
+    el('text',{x:20,y:d===1?40:200,style:'font:600 11px Poppins;fill:#888;letter-spacing:2px'},s2,'DAY '+d);
+    for(let i=0;i<4;i++){
+      const n=(d-1)*4+i+1,x=20+i*125,y=d===1?58:218;
+      el('rect',{x,y,width:112,height:96,rx:14,fill:'#1a1a1a',stroke:'#2e2e2e'},s2);
+      el('circle',{cx:x+56,cy:y+42,r:20,fill:'none',stroke:'#2a2a2a','stroke-width':3.5},s2);
+      const c=el('circle',{cx:x+56,cy:y+42,r:20,fill:'none',stroke:O,'stroke-width':3.5,'stroke-dasharray':'126','stroke-dashoffset':'126',transform:`rotate(-90 ${x+56} ${y+42})`},s2);
+      c.animate([{strokeDashoffset:126},{strokeDashoffset:0},{strokeDashoffset:0}],{duration:4400,delay:(n-1)*450,iterations:Infinity});
+      el('text',{x:x+56,y:y+47,'text-anchor':'middle',style:'font:700 13px Poppins;fill:#fff'},s2,n);
+      el('text',{x:x+56,y:y+82,'text-anchor':'middle',style:'font:500 10.5px Poppins;fill:#aaa'},s2,'Module '+n);
+      if(i<3)el('path',{d:`M${x+114} ${y+48} l8 0`,stroke:'#444','stroke-width':1.5},s2);
+    }
+  });
+}
+function journeyGame(){
+  $('jTitle').textContent='A game day, then an experiential day';
+  $('jSub').textContent='Day 1 is one continuous board game that builds a shared experience. Day 2 turns it into deeper practice through four Kolb loops.';
+  $('j1h').textContent='Day 1: one board game';$('j1p').textContent='Levels get harder. Each debrief unlocks a concept needed for the next level.';
+  $('j2h').textContent='Day 2: four Kolb loops';$('j2p').textContent='Each loop: experience, reflect, concept, practice.';
+  const s=$('jsvg1');s.innerHTML='';
+  const defs=el('defs',{},s);const lg=el('linearGradient',{id:'mt',x1:0,y1:0,x2:0,y2:1},defs);el('stop',{offset:'0','stop-color':'#2a2a2a'},lg);el('stop',{offset:'1','stop-color':'#151515'},lg);
+  el('path',{d:'M0 330 L90 240 L150 270 L240 170 L300 205 L400 80 L440 110 L520 40 L520 330 Z',fill:'url(#mt)'},s);
+  const P=[[40,300,'Start',0],[115,262,'Level 1',0],[190,230,'Level 2',0],[250,206,'Debrief',1],[320,172,'Level 3',0],[380,140,'Debrief',1],[480,70,'Final',0]];
+  const d='M'+P.map(p=>p[0]+' '+p[1]).join(' L');
+  el('path',{d,fill:'none',stroke:'#3a3a3a','stroke-width':3,'stroke-dasharray':'5 6'},s);
+  const tr=el('path',{d,fill:'none',stroke:O,'stroke-width':3.5,'stroke-linecap':'round'},s);
+  const L=tr.getTotalLength();tr.setAttribute('stroke-dasharray',L);tr.animate([{strokeDashoffset:L},{strokeDashoffset:0},{strokeDashoffset:0}],{duration:6000,iterations:Infinity});
+  P.forEach(([x,y,t,db],i)=>{
+    if(db){el('rect',{x:x-8,y:y-8,width:16,height:16,rx:4,fill:'#FFB066'},s);el('text',{x,y:y+4,'text-anchor':'middle',style:'font:700 9px Poppins;fill:#111'},s,'❚❚');}
+    else el('circle',{cx:x,cy:y,r:i===P.length-1?9:7,fill:i===P.length-1?O:'#151515',stroke:O,'stroke-width':2.5},s);
+    const first=i===0,last=i===P.length-1;
+    const tx=first||last?x:(db?x+10:x-8), ty=first?y+26:last?y-16:(db?y+24:y-14), an=first||last?'middle':(db?'start':'end');
+    el('text',{x:tx,y:ty,'text-anchor':an,style:'font:600 10.5px Poppins;fill:'+(db?'#FFB066':'#eee')},s,t);
+  });
+  el('text',{x:20,y:30,style:'font:600 11px Poppins;fill:#888;letter-spacing:2px'},s,'DAY 1 · TUCKMAN & THOMAS–KILMANN');
+  const s2=$('jsvg2');s2.innerHTML='';
+  el('text',{x:20,y:40,style:'font:600 11px Poppins;fill:#888;letter-spacing:2px'},s2,'DAY 2 · KOLB');
+  for(let i=0;i<4;i++){
+    const n=i+1,x=20+i*125,y=70;
+    el('rect',{x,y,width:112,height:150,rx:14,fill:'#1a1a1a',stroke:'#2e2e2e'},s2);
+    el('circle',{cx:x+56,cy:y+56,r:26,fill:'none',stroke:'#2a2a2a','stroke-width':4},s2);
+    const c=el('circle',{cx:x+56,cy:y+56,r:26,fill:'none',stroke:O,'stroke-width':4,'stroke-dasharray':'164','stroke-dashoffset':'164',transform:`rotate(-90 ${x+56} ${y+56})`},s2);
+    c.animate([{strokeDashoffset:164},{strokeDashoffset:0},{strokeDashoffset:0}],{duration:4400,delay:i*600,iterations:Infinity});
+    el('text',{x:x+56,y:y+62,'text-anchor':'middle',style:'font:700 15px Poppins;fill:#fff'},s2,n);
+    el('text',{x:x+56,y:y+112,'text-anchor':'middle',style:'font:600 12px Poppins;fill:#ddd'},s2,'Module '+n);
+    el('text',{x:x+56,y:y+130,'text-anchor':'middle',style:'font:400 10px Poppins;fill:#888'},s2,'1 full loop');
+    if(i<3)el('path',{d:`M${x+114} ${y+75} l8 0`,stroke:'#444','stroke-width':1.5},s2);
+  }
+  el('text',{x:262,y:270,'text-anchor':'middle',style:'font:600 11px Poppins;fill:#FF9A40;letter-spacing:2px'},s2,'THE SAME 4 MODULES AS OPTION A · DAY 2');
+}
+/* ---------------- TOOLKIT ---------------- */
+const TOOLS={
+ tki:['Thomas–Kilmann Conflict Modes','Five ways of handling conflict and when each one fits.'],
+ tuck:["Tuckman's Stages of Team Development",'Forming, Storming, Norming, Performing: where a team is, and how communication must change at each stage.'],
+ loi:['Ladder of Inference','How we jump from data to conclusions, and how to walk it back in a conversation.'],
+ scarf:['SCARF Model','The five social threats that trigger defensiveness.'],
+ nvc:['Nonviolent Communication (OFNR)','Observation, Feeling, Need, Request: saying hard things without attack.'],
+ tvr:['Task vs. Relationship Conflict & Psychological Safety','Keeping disagreement on the work, not the person.'],
+ cc:['Crucial Conversations: Make It Safe & STATE','Holding high-stakes dialogue without pushing or shutting down.'],
+ ivp:['Interests vs. Positions','Principled negotiation for cross-functional deadlocks.'],
+ dt:['Drama Triangle → TED*','From Victim–Persecutor–Rescuer to Creator–Challenger–Coach.']
+};
+const TK={
+ kolb:{title:'Option A: 8 tools, one per module',sub:'Day 1 builds how each person reacts and speaks under pressure. Day 2 builds how the team disagrees, resolves conflict and aligns.',
+   days:[{d:'Day 1',fmt:'4 Kolb modules',sb:'Self under Pressure: Perception, Threat & Voice',t:['loi','scarf','tki','nvc']},{d:'Day 2',fmt:'4 Kolb modules',sb:'Team in Conflict: Safety, Dialogue & Alignment',t:['tvr','cc','ivp','dt']}],
+   note:'<b>How it runs:</b> each tool is one 75-minute module that moves through Experience → Reflect → Concept → Practice. 4 modules per day, 8 tools in total.'},
+ game:{title:'Option B: 6 tools across a game day and a Kolb day',sub:'Day 1 is a board game covering two frameworks on team dynamics and conflict. Day 2 goes deeper through four Kolb modules.',
+   days:[{d:'Day 1',fmt:'Board game · 2 frameworks',sb:'Team Dynamics & Conflict Styles',t:['tuck','tki']},{d:'Day 2',fmt:'4 Kolb modules',sb:'Team in Conflict: Safety, Dialogue & Alignment',t:['tvr','cc','ivp','dt']}],
+   note:'<b>How it runs:</b> on Day 1, both frameworks are revealed in the game\'s debrief checkpoints and then used in the next levels. On Day 2, each tool is one 75-minute Kolb module. 6 tools in total.'}
+};
+function toolkit(){const c=TK[mode];
+  $('tkTitle').textContent=c.title;$('tkSub').textContent=c.sub;$('tkNote').innerHTML=c.note;
+  $('tk').innerHTML=c.days.map(d=>`<div class="tkc"><div class="hd"><h4>${d.d}</h4><span class="cnt">${d.t.length} ${d.fmt.startsWith('Board')?'frameworks':'tools'}</span></div><div class="sb">${d.sb}</div><div class="fmt">${d.fmt}</div>${d.t.map(k=>`<div class="tki"><i></i><div><b>${TOOLS[k][0]}</b><span>${TOOLS[k][1]}</span></div></div>`).join('')}</div>`).join('');
+}
+
+/* ---------------- COMPARE ---------------- */
+const CMP={
+ kolb:{c1:'8',c1d:'One concept per module, across 8 Kolb loops.',c1m:100,c2:'65<small>%</small>',c2d:'Experience & practice; ~35% reflection & concept.',c2m:65,c3:'Rich',c3d:'Broader theory; each concept block kept to ~15 min.',c3m:70,c4:'~60<small>%</small>',c4d:'Moderate to high. Each concept is practiced once, on real cases.',c4m:60,
+   r1:'Participant',r1d:'Moves through 8 separate loops, reflecting and practicing after each experience.',r2:'Facilitator',r2d:'Runs each experience, guides the reflection and teaches the concept.',r3:'A wider toolkit',r3d:'Teams that want broader coverage and more time on concepts.'},
+ game:{c1:'6',c1d:'The game covers 2 frameworks (Thomas–Kilmann + Tuckman), plus 4 tools on Day 2.',c1m:75,c2:'75<small>%</small>',c2d:'Gameplay, activity & practice; ~25% debrief & concept.',c2m:75,c3:'Balanced',c3d:'Light on Day 1 to keep the game flowing; deeper on Day 2.',c3m:50,c4:'~75<small>%</small>',c4d:'High. A shared game experience, then practice on real cases.',c4m:75,
+   r1:'Player, then participant',r1d:'Plays one board game on Day 1, then goes through four Kolb loops on Day 2.',r2:'Game Master, then facilitator',r2d:'Runs and debriefs the game on Day 1; facilitates the Kolb modules on Day 2.',r3:'Engagement + depth',r3d:'Teams that need a memorable shared experience and time to practice in depth.'}
+};
+function compare(){const c=CMP[mode];
+  ['c1','c2','c3','c4','r1','r2','r3'].forEach(k=>$(k).innerHTML=c[k]);
+  ['c1d','c2d','c3d','c4d','r1d','r2d','r3d'].forEach(k=>$(k).textContent=c[k]);
+  ['c1m','c2m','c3m','c4m'].forEach(k=>$(k).style.width=c[k]+'%');
+}
+
+/* ---------------- MODE ---------------- */
+const fadeEls=()=>document.querySelectorAll('.sh span, .sh p, .panel, .jcard, .m .v, .m .d, #tk, #tkNote');
+function setMode(m,first){
+  if(m===mode&&!first)return;
+  stop();mode=m;idx=0;drawn='';document.body.dataset.mode=m;
+  document.querySelectorAll('#toggle button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  document.querySelectorAll('.choice .c').forEach(c=>{const on=c.dataset.m===m;c.classList.toggle('on',on);c.querySelector('.chip').textContent=on?'Viewing':'View';});
+  movePill();
+  const fe=fadeEls();fe.forEach(e=>e.classList.add('fade','out'));
+  setTimeout(()=>{
+    if(m==='kolb'){$('roomTitle').textContent='Learning in loops';$('roomSub').innerHTML='Teams stay at their tables while the focus of the room shifts through the same four steps in every module. Press <b>Play</b> to watch it.';journeyKolb();}
+    else{$('roomTitle').textContent='Day 1 is a game. Day 2 is Kolb.';$('roomSub').innerHTML='On Day 1 each team plays on its own board, a shared board in the middle brings the teams together, and the trainer pauses the game to debrief. On Day 2 the room switches to the Kolb cycle. Press <b>Play</b> to watch it.';journeyGame();}
+    buildSteps();render();toolkit();compare();
+    fe.forEach(e=>e.classList.remove('out'));
+  },first?0:280);
+}
+function movePill(){const b=document.querySelector('#toggle button.on');const p=$('pill');p.style.left=b.offsetLeft+'px';p.style.width=b.offsetWidth+'px';}
+document.querySelectorAll('#toggle button').forEach(b=>b.onclick=()=>{setMode(b.dataset.m);window.scrollTo({top:0,behavior:'smooth'});});
+document.querySelectorAll('.choice .c').forEach(c=>c.onclick=()=>{setMode(c.dataset.m);window.scrollTo({top:0,behavior:'smooth'});});
+window.addEventListener('resize',movePill);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){stop();next();}if(e.key==='ArrowLeft'){stop();prev();}});
+mode='';setMode(location.hash==='#game'?'game':'kolb',true);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(movePill);
+})();
+</script>
+
+</body>
+</html>
